@@ -1,0 +1,68 @@
+{
+  "admin": [],
+  "user": [
+    {
+      "id": "50bd",
+      "firstname": "Bhavyasri",
+      "lastname": "Katukojwala",
+      "email": "bhavya@gmail.com",
+      "password": "Bhavya@12"
+    },
+    {
+      "id": "d4e6",
+      "firstname": "Yoga",
+      "lastname": "Chary",
+      "email": "chary2k@gmail.com",
+      "password": "Chary!2@"
+    },
+    {
+      "id": "c760",
+      "firstname": "Akash",
+      "lastname": "Paloju",
+      "email": "akask2004@gmail.com",
+      "password": "Akash@123"
+    },
+    {
+      "id": "d77a",
+      "firstname": "Cake",
+      "lastname": "Fake",
+      "email": "cake@gmail.com",
+      "password": "Cake@12"
+    },
+    {
+      "id": "f38f",
+      "firstname": "admin",
+      "lastname": "admin",
+      "email": "admin123@gmail.com",
+      "password": "Admin@2810"
+    }
+  ],
+  "items": [
+    {
+      "title": "Starters",
+      "img": "./assets/Biryani-image.jpg",
+      "route": "/starters"
+    },
+    {
+      "title": "Biryanis",
+      "img": "./assets/Biryani-image.jpg",
+      "route": "/biryanis"
+    },
+    {
+      "title": "Desserts",
+      "img": "./assets/Biryani-image.jpg",
+      "route": "/desserts"
+    },
+    {
+      "title": "Beverages",
+      "img": "./assets/Biryani-image.jpg",
+      "route": "/beverages"
+    },
+    {
+      "id": "e008",
+      "categoryid": 123456,
+      "title": "Curries",
+      "img": "C:\\fakepath\\biryani.jpg"
+    }
+  ]
+}

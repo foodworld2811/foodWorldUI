@@ -1,0 +1,42 @@
+<div mat-dialog-title class="title-container">
+    <h2>Add User Details</h2>
+</div>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Firstname</mat-label>
+                <input matInput placeholder="Enter Firstname" fromControlName="firstname">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Lastname</mat-label>
+                <input matInput placeholder="Enter Lastname" fromControlName="lastname">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Contact</mat-label>
+                <input matInput type="tel" placeholder="Enter Mobile Number" fromControlName="contact">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Address</mat-label>
+                <textarea matInput type="text" placeholder="Enter Address" fromControlName="address"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="Enter Username" fromControlName="username">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput placeholder="Enter Password" fromControlName="password">
+            </mat-form-field>
+        </div>  
+    </div>
+    <div mat-dialog-actions class="actions">
+        <button color="primary" mat-raised-button mat-dialog-close type="button">Back</button>
+    <button color="warn" mat-raised-button type="submit">Save</button>
+    </div>
+    
+</form>

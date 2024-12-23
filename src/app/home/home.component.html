@@ -1,0 +1,16 @@
+<div class="floating-button-container">
+    <button mat-fab class="floating-button" (click)="openCategoryForm()">
+        <mat-icon>add_circle</mat-icon>
+    </button>
+</div>
+<div class="headline-text">
+    <p class="instructions">Select Category</p>
+</div>
+<div class="card-container">
+    <mat-card class="example-card" appearance="outlined" *ngFor="let items of foodItemsArray" [routerLink]="items.route">
+        <mat-card-header>
+          <mat-card-title>{{ items.title }}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image [src]="items.img" [alt]="items.title">>
+      </mat-card>    
+</div>

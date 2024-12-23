@@ -1,0 +1,38 @@
+<mat-sidenav-container class="app-container">
+    <mat-sidenav #sidenav [(opened)]="opened">
+        <mat-nav-list>
+            <mat-list-item routerLink="#">
+                Breakfast
+            </mat-list-item>
+            <mat-list-item routerLink="#">
+                Breakfast
+            </mat-list-item>
+            <mat-list-item routerLink="#">
+                Breakfast
+            </mat-list-item>
+            <mat-list-item routerLink="#">
+                Breakfast
+            </mat-list-item>
+            <mat-list-item routerLink="#">
+                Breakfast
+            </mat-list-item>
+        </mat-nav-list> 
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <!-- <app-root (menuClicked)="sidenav.toggle()"></app-root>
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div> -->
+        <!-- <mat-toolbar *ngIf="ismenurequired" color="primary" class="tool-bar">
+            <button mat-icon-button (click)="sidenav.toggle()">
+              <mat-icon>menu</mat-icon>
+            </button>
+            <span>Rest</span>
+            <a routerLink="#">Home</a>
+            <span class="example-spacer"></span>
+            <a routerLink="login">
+              Logout
+            </a>
+          </mat-toolbar> -->
+    </mat-sidenav-content>
+  </mat-sidenav-container>

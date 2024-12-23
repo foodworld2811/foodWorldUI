@@ -1,0 +1,16 @@
+<mat-toolbar *ngIf="ismenurequired" class="tool-bar">
+  <button mat-icon-button (click)="menuClick.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>WaiterApp</span>
+  <a routerLink="#">Home</a>
+  <a (click)="openUserForm()">AddUser</a>
+  <span class="example-spacer"></span>
+  <a routerLink="login">
+    Logout
+  </a>
+</mat-toolbar>
+<div class="content" role="main">
+
+<router-outlet></router-outlet>
+</div>
