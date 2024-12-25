@@ -1,6 +1,11 @@
+
+
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HomeService } from '../services/home.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
   selector: 'app-category',
@@ -8,44 +13,47 @@ import { HomeService } from '../services/home.service';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent {
+  categoryTitle !: string;
+  categoryStatus : boolean = false;
+  file!:File;
+  selected !: string;
   categoryForm!:FormGroup;
-  previewUrl: any;
-  constructor(private fb:FormBuilder,private homeService:HomeService){
 
-  }
+  constructor(private fb:FormBuilder,private homeService:HomeService, private dialogRef:MatDialogRef<CategoryComponent>,
+      private authService:AuthService) { }
 
   ngOnInit(){
     this.categoryForm = this.fb.group({
-      categoryid:[''],
-      title:[''],
+      categoryStatus:[''],
+      categoryTitle:[''],
       img:[''],
     })
   }
+
+  onFileSelected(event:any){
+    this.file=event.target.files[0];
+  }
+
   addCategory(){
     if(this.categoryForm.valid){
-      this.homeService.addItems(this.categoryForm.value).subscribe({
+      const formData=new FormData();
+      formData.append('categoryTitle',this.categoryForm.get('categoryTitle')?.value);
+      formData.append('categoryStatus',this.categoryForm.get('categoryStatus')?.value);
+      formData.append('img',this.file);
+      formData.forEach((value,key) => {
+        console.log(key+' '+value);
+      });
+      this.homeService.addItems(formData).subscribe({
         next:(res)=>{
           console.log(res);
+          this.authService.openSnackBar("Category Added Successfully","Done")
+          this.dialogRef.close(true)
+        },
+        error:(err)=>{
+          console.log(err);
+          this.authService.openSnackBar("Failed to Add Category","Error")
         }
-      })
-    }
-  }
 
-  onUploadButtonClick(event : MouseEvent){
-    event.preventDefault();
-    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
-    fileInput?.click();
-  }
-
-  onFileSelected(event: Event):void{
-    const file = (event.target as HTMLInputElement).files?.[0];
-    if(file){
-      const reader = new FileReader();
-      reader.onload = (e) =>{
-        this.previewUrl = e.target?.result;
-        // this.categoryForm.patchValue({categoryimg:file})
-      };
-      reader.readAsDataURL(file)
-    }
-  }
+    })
+  }}
 }

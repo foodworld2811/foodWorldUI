@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div class="floating-button-container" *ngIf="isAdminLoggedin">
+    <button mat-fab class="floating-button" (click)="opensubCategoryForm()">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
+
+  <div class="card-container">
+    <mat-card class="example-card" appearance="outlined" *ngFor="let items of subCategoryItems; let i=index">
+      <mat-card-header>
+        <mat-card-title class="card-title">{{ items.itemName }}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="'data:image/png;base64,' + items.itemImage" [alt]="items.itemName">
+      <mat-card-content class="card-content">
+        <p class="price">Price: ₹{{items.itemPrice}}</p>
+        <div class="quantity-controls">
+            <button mat-icon-button color="primary" (click)="decreaseCount(i)">
+                <mat-icon>remove</mat-icon>
+            </button>
+        <input matInput class="item-count" [value]="items.count" readonly>
+        <button mat-icon-button color="primary" (click)="increaseCount(i)">
+            <mat-icon>add</mat-icon>
+        </button>
+        </div>
+        
+      </mat-card-content>
+      <mat-card-actions class="actions">
+        <div *ngIf="isAdminLoggedin">
+            <button mat-raised-button (click)="editSubCategoryForm(i)" color="primary">EDIT</button>
+        <!-- <button mat-raised-button (click)="deleteSubCategoryForm(i)" color="warn">DELETE</button> -->
+        </div>
+        
+      </mat-card-actions>
+    </mat-card>
+  </div>

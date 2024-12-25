@@ -6,37 +6,48 @@
         <div class="row">
             <mat-form-field appearance="outline">
                 <mat-label>Firstname</mat-label>
-                <input matInput placeholder="Enter Firstname" fromControlName="firstname">
+                <input matInput placeholder="Enter Firstname" formControlName="firstname">
+                <mat-error *ngIf="userForm.get('firstname')?.hasError('required')">Firstname is required</mat-error>
+                <mat-error *ngIf="userForm.get('firstname')?.hasError('pattern')">Invalid</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Lastname</mat-label>
-                <input matInput placeholder="Enter Lastname" fromControlName="lastname">
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label>Contact</mat-label>
-                <input matInput type="tel" placeholder="Enter Mobile Number" fromControlName="contact">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Address</mat-label>
-                <textarea matInput type="text" placeholder="Enter Address" fromControlName="address"></textarea>
+                <input matInput placeholder="Enter Lastname" formControlName="lastname">
+                <mat-error *ngIf="userForm.get('lastname')?.hasError('required')">Lastname is required</mat-error>
+                <mat-error *ngIf="userForm.get('lastname')?.hasError('pattern')">Invalid</mat-error>
             </mat-form-field>
         </div>
         <div class="row">
             <mat-form-field appearance="outline">
                 <mat-label>Username</mat-label>
-                <input matInput placeholder="Enter Username" fromControlName="username">
+                <input matInput placeholder="Enter Username" formControlName="username">
+                <mat-error *ngIf="userForm.get('username')?.hasError('required')">Username is required</mat-error>
+                <mat-error *ngIf="userForm.get('username')?.hasError('minlength')">Invalid Username</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <input type="password" matInput placeholder="Enter Password" fromControlName="password">
+                <input type="password" matInput placeholder="Enter Password" formControlName="password">
+                <mat-error *ngIf="userForm.get('password')?.hasError('required')">Password is required</mat-error>
+                <mat-error *ngIf="userForm.get('password')?.hasError('pattern')">Invalid Password</mat-error>
             </mat-form-field>
         </div>  
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Contact</mat-label>
+                <input matInput type="tel" placeholder="Enter Mobile Number" formControlName="contact">
+                <mat-error *ngIf="userForm.get('contact')?.hasError('required')">Contact is required</mat-error>
+                <mat-error *ngIf="userForm.get('contact')?.hasError('pattern')">Invalid Mobile Number</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Address</mat-label>
+                <textarea matInput type="text" placeholder="Enter Address" formControlName="address"></textarea>
+                <mat-error *ngIf="userForm.get('address')?.hasError('required')">Address is required</mat-error>
+            </mat-form-field>
+        </div>
     </div>
     <div mat-dialog-actions class="actions">
-        <button color="primary" mat-raised-button mat-dialog-close type="button">Back</button>
-    <button color="warn" mat-raised-button type="submit">Save</button>
+        <button color="primary" mat-raised-button [mat-dialog-close]="false" type="button">Back</button>
+       <button color="warn" mat-raised-button type="submit" [disabled]="userForm.invalid">Save</button>
     </div>
     
 </form>

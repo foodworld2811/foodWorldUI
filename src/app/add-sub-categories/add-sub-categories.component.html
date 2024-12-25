@@ -1,20 +1,25 @@
-
 <div mat-dialog-title class="title-container">
-    <p>Add Category</p>
+    <p>Add {{ categoryName }} Item</p>
 </div>
-<form [formGroup]="categoryForm" (ngSubmit)="addCategory()">
+<form [formGroup]="subCategoriesForm" (ngSubmit)="addSubCategory()">
     <div mat-dialog-content class="content">
         <mat-form-field appearance="outline">
-            <mat-label>Category Title</mat-label>
-            <input matInput type="text" placeholder="Enter Category Title" formControlName="categoryTitle">
+            <mat-label>Item Name</mat-label>
+            <input matInput type="text" placeholder="Enter Item Name" formControlName="itemName">
+            <mat-error *ngIf="subCategoriesForm.get('itemName')?.hasError('required')">Status is required</mat-error> 
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Item Price</mat-label>
+            <input matInput type="text" placeholder="Enter Item Price" formControlName="itemPrice">
+            <mat-error *ngIf="subCategoriesForm.get('itemPrice')?.hasError('required')">Status is required</mat-error> 
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Select Action</mat-label>
-            <mat-select [(value)]="selected" formControlName="categoryStatus">
+            <mat-select [(value)]="selected" formControlName="itemstatus">
                 <mat-option value="true">InStock</mat-option>
                 <mat-option value="false">OutStock</mat-option>
             </mat-select> 
-            <mat-error *ngIf="categoryForm.get('isActive')?.hasError('required')">Status is required</mat-error> 
+            <mat-error *ngIf="subCategoriesForm.get('itemStatus')?.hasError('required')">Status is required</mat-error> 
         </mat-form-field>
         <div class="upload-container">
                 <!-- <button mat-raised-button color="primary" (click)="onUploadButtonClick($event)">Upload Image</button> -->
@@ -31,6 +36,6 @@
 
     <div mat-dialog-actions class="actions">
         <button mat-raised-button mat-dialog-close>Cancel</button>
-        <button mat-raised-button color="warn" type="submit" [disabled]="categoryForm.invalid">Add</button>
+        <button mat-raised-button color="warn" type="submit" [disabled]="subCategoriesForm.invalid">Add</button>
   </div>
 </form>

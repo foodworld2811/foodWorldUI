@@ -24,11 +24,16 @@ import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AddUserComponent } from './add-user/add-user.component';
-import { StartersComponent } from './starters/starters.component';
-import { BiryanisComponent } from './biryanis/biryanis.component';
-import { DessertsComponent } from './desserts/desserts.component';
-import { BeveragesComponent } from './beverages/beverages.component';
-import { CategoryComponent } from './category/category.component'
+import { CategoryComponent } from './category/category.component';
+import { MatSelectModule } from '@angular/material/select';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
+import { RouterModule } from '@angular/router';
+import { AddSubCategoriesComponent } from './add-sub-categories/add-sub-categories.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -39,11 +44,12 @@ import { CategoryComponent } from './category/category.component'
     AdminDashboardComponent,
     NavbarComponent,
     AddUserComponent,
-    StartersComponent,
-    BiryanisComponent,
-    DessertsComponent,
-    BeveragesComponent,
     CategoryComponent,
+    UserDetailsComponent,
+    ConfirmDialogComponent,
+    SubCategoriesComponent,
+    AddSubCategoriesComponent,
+    CartComponent,
     
   ],
   imports: [
@@ -64,7 +70,11 @@ import { CategoryComponent } from './category/category.component'
     MatIconModule,
     MatSidenavModule,
     MatListModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectModule,
+    MatPaginatorModule,
+    MatTableModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

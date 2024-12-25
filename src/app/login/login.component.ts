@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -12,7 +12,9 @@ export class LoginComponent {
 
   loginForm!: FormGroup;
   userdata: any;
-  constructor(private fb: FormBuilder, private router: Router, private _auth: AuthService) {
+  isAdminLoggedIn= false;
+  constructor(private fb: FormBuilder, private router: Router,
+     private _auth: AuthService) {
     sessionStorage.clear();
   }
 
@@ -38,16 +40,17 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this._auth.Islogged(this.loginForm.value.username).subscribe({
         next: (res) => {
-          // console.log(res);
-
           this.userdata = res;
-          console.log(this.userdata[0].email);
+          console.log(this.userdata[0].username);
 
           // console.log(this.userdata); 
-          if (this.userdata[0].email === 'admin123@gmail.com') {
+          if (this.userdata[0].username === 'admin123') {
             if (this.userdata[0].password === this.loginForm.value.password) {
-              sessionStorage.setItem('admin', this.loginForm.value.username);
-              this.router.navigate(['/admin'])
+              this.isAdminLoggedIn = true;
+              sessionStorage.setItem('username', this.loginForm.value.username);
+              sessionStorage.setItem('isAdminLoggedIn','true')
+              this._auth.openSnackBar("Admin Login Successfully")
+              this.router.navigate(['/home'])
             } else {
               this._auth.openSnackBar("Check admin Credentials")
             }

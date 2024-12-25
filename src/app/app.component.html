@@ -1,16 +1,12 @@
-<mat-toolbar *ngIf="ismenurequired" class="tool-bar">
-  <button mat-icon-button (click)="menuClick.emit()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>WaiterApp</span>
-  <a routerLink="#">Home</a>
-  <a (click)="openUserForm()">AddUser</a>
+<!-- <mat-toolbar *ngIf="ismenurequired" class="tool-bar">
+  <a>Hi,{{username}}!!</a>
+  <div *ngIf="isAdminLoggedin">
+    <a routerLink="/user-details">User</a>
+  </div>
+  
+  <span class="title">Food World</span>
   <span class="example-spacer"></span>
-  <a routerLink="login">
-    Logout
-  </a>
-</mat-toolbar>
-<div class="content" role="main">
+  <a routerLink="login">Logout</a>
+</mat-toolbar> -->
 
 <router-outlet></router-outlet>
-</div>

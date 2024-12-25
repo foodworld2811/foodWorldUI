@@ -3,23 +3,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AuthGuard } from './guard/auth.guard';
-import { StartersComponent } from './starters/starters.component';
-import { BiryanisComponent } from './biryanis/biryanis.component';
-import { DessertsComponent } from './desserts/desserts.component';
-import { BeveragesComponent } from './beverages/beverages.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
-  {path:'user/:email',component:LoginComponent},
+  {path:'user/:username',component:LoginComponent},
   {path:'register',component:RegisterComponent},
-  {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
-  {path:'admin',component:AdminDashboardComponent},
-  {path:'starters',component:StartersComponent},
-  {path:'biryanis',component:BiryanisComponent},
-  {path:'desserts',component:DessertsComponent},
-  {path:'beverages',component:BeveragesComponent},
+  {path:'user-details',component:UserDetailsComponent},
+  {path:'home',
+    component:HomeComponent,
+    canActivate:[AuthGuard] 
+  },
+  {path:'home/:category',component:SubCategoriesComponent},
+  {path:'cart',component:CartComponent,canActivate:[AuthGuard]},
   {path:'',redirectTo:'/login',pathMatch:'full'},
 ];
 

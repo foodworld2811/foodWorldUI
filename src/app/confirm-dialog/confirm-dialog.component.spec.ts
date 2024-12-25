@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BiryanisComponent } from './biryanis.component';
+import { ConfirmDialogComponent } from './confirm-dialog.component';
 
-describe('BiryanisComponent', () => {
-  let component: BiryanisComponent;
-  let fixture: ComponentFixture<BiryanisComponent>;
+describe('ConfirmDialogComponent', () => {
+  let component: ConfirmDialogComponent;
+  let fixture: ComponentFixture<ConfirmDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BiryanisComponent ]
+      declarations: [ ConfirmDialogComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BiryanisComponent);
+    fixture = TestBed.createComponent(ConfirmDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

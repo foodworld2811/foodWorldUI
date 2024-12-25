@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-
+  
   constructor(private _snackBar:MatSnackBar, private _http:HttpClient) { }
 
   openSnackBar(message:any, action: any = 'OK'){
@@ -17,13 +17,23 @@ export class AuthService {
   }
 
   addUser(data: any):Observable<any>{
-    return this._http.post('http://localhost:3000/user',data)
+    return this._http.post('http://localhost:8080/api/users',data)
   }
 
+  getUsers():Observable<any>{
+    return this._http.get('http://localhost:3000/user')
+  }
+
+  updateUserDetails(id:number,data:any):Observable<any>{
+    return this._http.put(`http://localhost:8080/api/users/${id}`,data)
+  }
+
+  deleteUser(id:number):Observable<any>{
+    return this._http.delete(`http://localhost:8080/api/users/${id}`)
+  }
   Islogged(username: string):Observable<any>{
-    return this._http.get(`http://localhost:3000/user?email=${username}`);
+    return this._http.get(`http://localhost:3000/user?username=${username}`);
   }
-
   loggedIn(){
     return sessionStorage.getItem('username')!=null;
   }

@@ -1,0 +1,29 @@
+.example-spacer{
+    flex: 1 1 auto;
+}
+
+.mat-toolbar{
+    flex: 1 1 auto;
+    background: linear-gradient(90deg, #ff7e5f,#feb47b);
+    mat-icon{
+         color: white;
+    }
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.main-body{
+    padding-top: 20px;
+    margin: 0 auto;
+    max-width: 1248px;
+
+    mat-form-field{
+        width: 100%;
+    }
+    h1{
+        color:#ff7e5f ;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        text-align: center;
+    }
+}

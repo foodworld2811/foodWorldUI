@@ -1,16 +1,27 @@
-<div class="floating-button-container">
+<app-navbar></app-navbar>
+<!-- <mat-toolbar *ngIf="ismenurequired" class="tool-bar">
+    <span class="title">FoodWorld</span>
+    <a>Hi,{{username}}!!</a>
+    <div *ngIf="isAdminLoggedin">
+        <a routerLink="/user-details">User</a>
+      </div>  
+    <span class="example-spacer"></span>
+    <a (click)="logout()">Logout</a>
+  </mat-toolbar> -->
+<div class="floating-button-container" *ngIf="isAdminLoggedin">
     <button mat-fab class="floating-button" (click)="openCategoryForm()">
-        <mat-icon>add_circle</mat-icon>
+      <mat-icon>add_circle</mat-icon>
     </button>
-</div>
-<div class="headline-text">
+  </div>
+  <div class="headline-text">
     <p class="instructions">Select Category</p>
-</div>
-<div class="card-container">
-    <mat-card class="example-card" appearance="outlined" *ngFor="let items of foodItemsArray" [routerLink]="items.route">
-        <mat-card-header>
-          <mat-card-title>{{ items.title }}</mat-card-title>
-        </mat-card-header>
-        <img mat-card-image [src]="items.img" [alt]="items.title">>
-      </mat-card>    
-</div>
+  </div>
+  
+  <div class="card-container">
+    <mat-card class="example-card" appearance="outlined" *ngFor="let items of foodItemsArray" [routerLink]="items.categoryTitle">
+      <mat-card-header>
+        <mat-card-title>{{ items.categoryTitle }}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="'data:image/png;base64,' + items.categoryimg" [alt]="items.categoryTitle">
+    </mat-card>
+  </div>
