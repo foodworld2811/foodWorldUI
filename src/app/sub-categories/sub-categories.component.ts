@@ -16,11 +16,17 @@ export class SubCategoriesComponent {
   subCategoryItems: any = [];
   categoryTitle: string | null = null;
   isAdminLoggedin: any;
-  cartItems:any[]=[];
+  cartItems: any[] = [];
   constructor(private route: ActivatedRoute,
     private homeService: HomeService,
     private dialog: MatDialog,
-     private cartService:CartService) { }
+    private cartService: CartService) { 
+       this.cartService.cartItems$.subscribe(items=>{
+           this.cartItems=items;
+          //  console.log(this.cartItems);
+           
+         })
+    }
 
   ngOnInit() {
     this.isAdminLoggedin = sessionStorage.getItem('isAdminLoggedIn')
@@ -36,8 +42,11 @@ export class SubCategoriesComponent {
     this.homeService.getSubCategoryItems().subscribe({
       next: (data: any) => {
         this.subCategoryItems = data.filter((item: any) => item.categoryName === this.categoryTitle)
-        .map((item:any)=>({...item,count:0}));
-        // console.log(this.subCategoryItems);
+          .map((item: any) => { 
+            const cartItem = this.cartItems.find(cart=> cart.itemId === item.itemId);
+            return {...item,count : cartItem ? cartItem.count:0}
+          });
+        console.log("subCategoryItems",this.subCategoryItems);
       },
       error: (err) => {
         console.log(err);
@@ -49,30 +58,39 @@ export class SubCategoriesComponent {
   opensubCategoryForm() {
     this.dialog.open(AddSubCategoriesComponent, {
       data: { categoryTitle: this.categoryTitle }
+    }).afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadSubCategories();
+      }
     })
   }
-  decreaseCount(index:number){
-    if(this.subCategoryItems[index].count>0){
+  decreaseCount(index: number) {
+    if (this.subCategoryItems[index].count > 0) {
       this.subCategoryItems[index].count--;
-      if(this.subCategoryItems[index].count===0){
+      if (this.subCategoryItems[index].count > 0) {
+        this.cartService.updateItemQuantity(this.subCategoryItems[index],this.subCategoryItems[index].count);
+      }else{
         this.cartService.removeItem(this.subCategoryItems[index]);
-        this.cartItems=this.cartService.getCartItems();
       }
     }
   }
-  increaseCount(index:number){
+  increaseCount(index: number) {
     this.subCategoryItems[index].count++;
-    if(this.subCategoryItems[index].count>0){
-      this.cartService.addItem(this.subCategoryItems[index],1)
+    if (this.subCategoryItems[index].count > 0) {
+      this.cartService.updateItemQuantity(this.subCategoryItems[index], this.subCategoryItems[index].count)
       // this.subCategoryItems[index].count = 0;
     }
   }
 
-  editSubCategoryForm(index:number){
+  editSubCategoryForm(index: number) {
     const data = this.subCategoryItems[index];
-    console.log(data);
-    
-    this.dialog.open(AddSubCategoriesComponent,{data})
+    this.dialog.open(AddSubCategoriesComponent, {
+      data: {
+        ...data, categoryTitle: this.categoryTitle
+      }
+    }).afterClosed().subscribe((result) => {
+      this.loadSubCategories();
+    })
   }
 
 }

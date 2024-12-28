@@ -45,10 +45,7 @@
   }
 
 .actions{
-    button{
-        margin-left: 70px;
-        flex:0.5;
-    }
+   flex: 1;
 }
 mat-card-header{
     padding: 10px 16px;
@@ -93,6 +90,10 @@ mat-card-header{
     }
 }
 
+.disabled-card.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
 .quantity-controls .item-count{
     width: 30px;
     text-align: center;

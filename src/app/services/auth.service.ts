@@ -11,7 +11,7 @@ export class AuthService {
   constructor(private _snackBar:MatSnackBar, private _http:HttpClient) { }
 
   openSnackBar(message:any, action: any = 'OK'){
-    this._snackBar.open(message,action,{duration:3000,verticalPosition:'top'
+    this._snackBar.open(message,action,{duration:3000,verticalPosition:'bottom'
 
     })
   }

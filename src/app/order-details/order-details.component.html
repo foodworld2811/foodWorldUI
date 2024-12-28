@@ -1,0 +1,45 @@
+<div class="main-body">
+    <h1>Order Details</h1>
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput #input (keyup)="applyFilter($event)">
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="tableNumber">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>TableNo.</th>
+                <td mat-cell *matCellDef="let row">{{row.tableNumber}}</td>
+            </ng-container>
+            <ng-container matColumnDef="orderStatus">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Order Status</th>
+                <td mat-cell *matCellDef="let row">{{row.orderStatus}}</td>
+            </ng-container>
+            <ng-container matColumnDef="orderAction">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Delivery Status</th>
+                 <td mat-cell *matCellDef="let row">
+                    <button mat-icon-button (click)="viewOrders(row.orderId)">
+                        View
+                    </button>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-icon-button (click)="openEditOrderDetails(row.orderId)">
+                        <mat-icon color="primary">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="deleteOrderDetails(row.orderId)">
+                        <mat-icon color="warn">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row;columns: displayedColumns"></tr>
+            <tr class="mt-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5,10,25,100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+</div>

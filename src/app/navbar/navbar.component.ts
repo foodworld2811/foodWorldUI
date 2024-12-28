@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { HomeService } from '../services/home.service';
+import { CartService } from '../services/cart.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,11 +16,24 @@ export class NavbarComponent {
   username:string='';
   isAdminLoggedin:any;
   isBackiconrequired=false;
+  totalItemsCount:number =0;
   constructor(private router:Router, private _dialog:MatDialog,
     private homeService:HomeService,
-  private cdr: ChangeDetectorRef){
-    this.isAdminLoggedin = sessionStorage.getItem('isAdminLoggedIn')
-    this.username = sessionStorage.getItem('username') || '';
+  private cdr: ChangeDetectorRef,private cartService:CartService){
+    // this.isAdminLoggedin = sessionStorage.getItem('isAdminLoggedIn')
+    // this.username = sessionStorage.getItem('username') || '';
+    homeService.username$.subscribe(name=>{
+      this.username=name;
+    })
+    homeService.isAdmin$.subscribe(isAdmin=>{
+      this.isAdminLoggedin = isAdmin;
+    })
+  }
+
+  ngOnInit(){
+    this.cartService.totalItems$.subscribe(total=>{
+      this.totalItemsCount=total;
+    })
   }
 ngDoCheck(): void {
    const currentUrl = this.router.url;

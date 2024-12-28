@@ -1,0 +1,50 @@
+.main-body {
+    padding-top: 20px;
+    margin: 0 auto;
+    max-width: 1248px;
+
+    mat-form-field {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        color: #ff7e5f;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .mat-elevation-z8 {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        background-color: #ff7e5f;
+        color: white
+    }
+    td{
+        color: #555555;
+        border-bottom: 1px solid #dddddd;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #f2cabe;
+    }
+
+    tr:nth-child(even) {
+        background-color: white;
+    }
+
+    /* tr:hover {
+        background-color: white;
+    } */
+
+    
+}

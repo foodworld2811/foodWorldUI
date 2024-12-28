@@ -1,12 +1,13 @@
 <app-navbar></app-navbar>
 <div class="floating-button-container" *ngIf="isAdminLoggedin">
-    <button mat-fab class="floating-button" (click)="opensubCategoryForm()">
-      <mat-icon>add_circle</mat-icon>
-    </button>
-  </div>
+  <button mat-fab class="floating-button" (click)="opensubCategoryForm()">
+    <mat-icon>add_circle</mat-icon>
+  </button>
+</div>
 
-  <div class="card-container">
-    <mat-card class="example-card" appearance="outlined" *ngFor="let items of subCategoryItems; let i=index">
+<div class="card-container">
+  <mat-card class="example-card" appearance="outlined" *ngFor="let items of subCategoryItems; let i=index" >
+    <div class="disabled-card" [class.disabled]="!items.itemstatus">
       <mat-card-header>
         <mat-card-title class="card-title">{{ items.itemName }}</mat-card-title>
       </mat-card-header>
@@ -14,22 +15,26 @@
       <mat-card-content class="card-content">
         <p class="price">Price: ₹{{items.itemPrice}}</p>
         <div class="quantity-controls">
-            <button mat-icon-button color="primary" (click)="decreaseCount(i)">
-                <mat-icon>remove</mat-icon>
-            </button>
-        <input matInput class="item-count" [value]="items.count" readonly>
-        <button mat-icon-button color="primary" (click)="increaseCount(i)">
+          <button mat-icon-button color="primary" (click)="decreaseCount(i)" [disabled]="!items.itemstatus">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <input matInput class="item-count" [value]="items.count" readonly [disabled]="!items.itemstatus">
+          <button mat-icon-button color="primary" (click)="increaseCount(i)" [disabled]="!items.itemstatus">
             <mat-icon>add</mat-icon>
-        </button>
+          </button>
         </div>
-        
+  
       </mat-card-content>
+    </div>
+    
+
+    <div *ngIf="isAdminLoggedin">
       <mat-card-actions class="actions">
-        <div *ngIf="isAdminLoggedin">
-            <button mat-raised-button (click)="editSubCategoryForm(i)" color="primary">EDIT</button>
-        <!-- <button mat-raised-button (click)="deleteSubCategoryForm(i)" color="warn">DELETE</button> -->
-        </div>
-        
+      <button mat-raised-button (click)="editSubCategoryForm(i)" color="primary">EDIT</button>
       </mat-card-actions>
-    </mat-card>
-  </div>
+      <!-- <button mat-raised-button (click)="deleteSubCategoryForm(i)" color="warn">DELETE</button> -->
+    </div>
+
+
+  </mat-card>
+</div>

@@ -6,36 +6,30 @@
         <mat-form-field appearance="outline">
             <mat-label>Item Name</mat-label>
             <input matInput type="text" placeholder="Enter Item Name" formControlName="itemName">
-            <mat-error *ngIf="subCategoriesForm.get('itemName')?.hasError('required')">Status is required</mat-error> 
+            <mat-error *ngIf="subCategoriesForm.get('itemName')?.hasError('required')">ItemName is required</mat-error>
+            <mat-error *ngIf="subCategoriesForm.get('itemName')?.hasError('itemExists')">Already Exists</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Item Price</mat-label>
             <input matInput type="text" placeholder="Enter Item Price" formControlName="itemPrice">
-            <mat-error *ngIf="subCategoriesForm.get('itemPrice')?.hasError('required')">Status is required</mat-error> 
+            <mat-error *ngIf="subCategoriesForm.get('itemPrice')?.hasError('required')">ItemPrice is
+                required</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Select Action</mat-label>
             <mat-select [(value)]="selected" formControlName="itemstatus">
                 <mat-option value="true">InStock</mat-option>
                 <mat-option value="false">OutStock</mat-option>
-            </mat-select> 
-            <mat-error *ngIf="subCategoriesForm.get('itemStatus')?.hasError('required')">Status is required</mat-error> 
+            </mat-select>
+            <mat-error *ngIf="subCategoriesForm.get('itemStatus')?.hasError('required')">Status is required</mat-error>
         </mat-form-field>
         <div class="upload-container">
-                <!-- <button mat-raised-button color="primary" (click)="onUploadButtonClick($event)">Upload Image</button> -->
-                <!-- <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" hidden formControlName="img"> -->
-                <input class="form-control" type="file"
-                (change)="onFileSelected($event)"
-                />
-              
-            <!-- <div *ngIf="previewUrl" class="preview">
-                <img [src]="previewUrl" alt="Image Preview"> -->
-            <!-- </div> -->
+            <input class="form-control" type="file" (change)="onFileSelected($event)" />
         </div>
     </div>
 
     <div mat-dialog-actions class="actions">
         <button mat-raised-button mat-dialog-close>Cancel</button>
-        <button mat-raised-button color="warn" type="submit" [disabled]="subCategoriesForm.invalid">Add</button>
-  </div>
+        <button mat-raised-button color="warn" type="submit" [disabled]="subCategoriesForm.invalid">Save</button>
+    </div>
 </form>

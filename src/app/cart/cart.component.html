@@ -1,1 +1,34 @@
-<h4>Hello</h4>
+<app-navbar></app-navbar>
+<div class="cart-container">
+       
+    <div *ngFor="let item of cartItems" class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 col-sm-2">
+                    <img [src]="'data:image/jpeg;base64,' + item.itemImage" alt="{{ item.itemName }}" class="img-fluid"
+                        style="max-width: 100px; height: auto;">
+                    <h5 class="card-title">{{ item.itemName}}</h5>
+                    <p class="card-text">Amount: ₹{{item.itemPrice}}</p>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="quantity-controls mt-2">
+                        <button class="btn btn-danger btn-sm" (click)="decreaseQuantity(item)">-</button>
+                        <span class="mx-2">{{ item.count || 0 }}</span>
+                        <button class="btn btn-success btn-sm" (click)="increaseQuantity(item)">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <label for="table-number">Select Table:</label>
+    <select id="table-number" class="form-control" [(ngModel)]="selectedTableNumber" > 
+        <option [value]="null" disabled>Select a table</option>
+        <option *ngFor="let table of tableNumbers" [value]="table">{{table}}</option>
+    </select>
+</div>
+<div class="checkout-button">
+    <button mat-raised-button (click)="checkout()">Checkout<mat-icon>arrow_forward</mat-icon></button>
+</div>
+
+<!-- onmouseover="filteredTablenumbers()" -->

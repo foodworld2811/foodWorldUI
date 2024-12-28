@@ -1,0 +1,111 @@
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+
+  .table-dropdown{
+    margin-bottom: 16px;
+    padding: 8px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+  }
+  
+  .card-body {
+    padding: 16px;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .card-text {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .card img {
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .quantity-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .quantity-controls button {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    line-height: 0;
+    border-radius: 50%;
+  }
+  
+  .quantity-controls span {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 10px;
+  }
+  
+.checkout-button{
+  display: flex;
+  justify-content: right;
+  margin: 20px;
+}
+
+.checkout-button button{
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  /* font-weight: bold; */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #ff6435, #e64a19);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.checkout-button button mat-icon{
+  margin-left: 8px;
+  font-size: 20px;
+}
+
+.checkout-button button:hover{
+  background: linear-gradient(90deg,#e64a19,#bf360c);
+  transform: translateY(-4px);
+}
+
+.checkout-button button:active{
+  transform: translateY(1px);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}

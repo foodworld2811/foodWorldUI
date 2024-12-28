@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
@@ -34,6 +33,9 @@ import { SubCategoriesComponent } from './sub-categories/sub-categories.componen
 import { RouterModule } from '@angular/router';
 import { AddSubCategoriesComponent } from './add-sub-categories/add-sub-categories.component';
 import { CartComponent } from './cart/cart.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { ViewOrdersComponent } from './view-orders/view-orders.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,6 @@ import { CartComponent } from './cart/cart.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    AdminDashboardComponent,
     NavbarComponent,
     AddUserComponent,
     CategoryComponent,
@@ -50,6 +51,8 @@ import { CartComponent } from './cart/cart.component';
     SubCategoriesComponent,
     AddSubCategoriesComponent,
     CartComponent,
+    OrderDetailsComponent,
+    ViewOrdersComponent,
     
   ],
   imports: [
@@ -74,7 +77,8 @@ import { CartComponent } from './cart/cart.component';
     MatSelectModule,
     MatPaginatorModule,
     MatTableModule,
-    RouterModule
+    RouterModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

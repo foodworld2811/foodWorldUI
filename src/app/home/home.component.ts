@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { CategoryComponent } from '../category/category.component';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 interface CategoryItems {
   categoryTitle: string;
@@ -24,10 +24,12 @@ export class HomeComponent implements OnInit {
   ismenurequired=false;
   username:string='';
   isAdminLoggedin :any;
+  
   constructor(
     private homeService: HomeService,
     private _dialog: MatDialog,
-    private router:Router
+    private router:Router,
+    private route:ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -66,5 +68,17 @@ export class HomeComponent implements OnInit {
           })
   }
 
-
+editCategoryForm(id:number){
+  const data = this.foodItemsArray[id];
+  console.log("data",data);
+  
+  const dialogRef = this._dialog.open(CategoryComponent,{data})
+  dialogRef.afterClosed().subscribe({
+    next:(val)=>{
+      if(val){
+        this.getCategoryList();
+      }
+    }
+  })
+}
 }

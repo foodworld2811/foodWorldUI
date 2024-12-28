@@ -18,10 +18,19 @@
   </div>
   
   <div class="card-container">
-    <mat-card class="example-card" appearance="outlined" *ngFor="let items of foodItemsArray" [routerLink]="items.categoryTitle">
+    <mat-card class="example-card" appearance="outlined" *ngFor="let items of foodItemsArray, let i=index" [routerLink]="items.categoryTitle">
       <mat-card-header>
         <mat-card-title>{{ items.categoryTitle }}</mat-card-title>
       </mat-card-header>
       <img mat-card-image [src]="'data:image/png;base64,' + items.categoryimg" [alt]="items.categoryTitle">
+
+      <div *ngIf="isAdminLoggedin">
+        <mat-card-actions class="actions">
+        <button mat-raised-button (click)="editCategoryForm(i)" color="primary">EDIT</button>
+        </mat-card-actions>
+        <!-- <button mat-raised-button (click)="deleteSubCategoryForm(i)" color="warn">DELETE</button> -->
+      </div>
     </mat-card>
+
+
   </div>

@@ -8,6 +8,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
 import { CartComponent } from './cart/cart.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { ViewOrdersComponent } from './view-orders/view-orders.component';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -19,8 +21,10 @@ const routes: Routes = [
     canActivate:[AuthGuard] 
   },
   {path:'home/:category',component:SubCategoriesComponent},
+  {path:'order-details',component:OrderDetailsComponent},
+  {path:'view-orders',component:ViewOrdersComponent},
   {path:'cart',component:CartComponent,canActivate:[AuthGuard]},
-  {path:'',redirectTo:'/login',pathMatch:'full'},
+  {path:'',redirectTo:'/login',pathMatch:'full'}
 ];
 
 @NgModule({
