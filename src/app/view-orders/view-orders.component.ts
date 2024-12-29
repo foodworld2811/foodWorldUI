@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
-import { HomeService } from '../services/home.service';
+import { HomeService} from '../services/home.service';
 
 @Component({
   selector: 'app-view-orders',
@@ -8,55 +8,46 @@ import { HomeService } from '../services/home.service';
   styleUrls: ['./view-orders.component.css']
 })
 export class ViewOrdersComponent implements OnInit{
-  orderId:any;
-  orderItems: any[] = [];
-  itemIds:any[]=[];
-  quantities:any[]=[];
-  categoryItems:any[]=[];
-  itemNames:string[]=[];
-  prices:string[]=[];
+
 constructor(private route:ActivatedRoute,private homeService:HomeService){}
-
+  orderId!: number; 
+  orderItems: any[] = [];
 ngOnInit(){
-  this.route.paramMap.subscribe((params)=>{
-    this.orderId = params;
-  })
+  this.route.queryParams.subscribe(params => {
+    this.orderId = +params['orderId']; 
+    console.log('Order ID:', this.orderId);
+  });
+  this.getOrderItems();
 }
 
-loadOrderItems(){
-  this.homeService.getOrderItems(this.orderId).subscribe({
-    next:(res)=>{
-      this.orderItems = res;
-      this.itemIds = this.orderItems.map(item=> item.itemId);
-      this.quantities = this.orderItems.map(count=> count.quantity);
-      this.homeService.getSubCategoryItems().subscribe({
-        next:(data)=>{
-          this.categoryItems = data;
-          
-          this.orderItems = this.orderItems.map((orderItem)=>{
-            const categoryItem = this.categoryItems.find(
-              (item)=> item.itemId === orderItem.itemId
-            );
+getTotal(price: number, quantity: number): number {
+  console.log('Price:', price, 'Quantity:', quantity);
+  return price * quantity;
+}
 
-            if(categoryItem){
-              return{
-                ...orderItem,
-                itemName:categoryItem.itemName,
-                itemPrice: categoryItem.itemPrice,
-              };
-            }else{
-              return orderItem;
-            }
-          });
-          console.log(this.orderItems);
-          
-        },
-        error:(err)=>{
-          console.log('Error loading order items:',err);
-          
-        }
-      })
+getOrderItems(): void {
+  this.homeService.getOrderItems(this.orderId).subscribe(
+    (data) => {
+      this.orderItems = data;
+      console.log('Order Items:', this.orderItems);
+    },
+    (error) => {
+      console.error('Error fetching order items', error);
     }
-  })
+  );
 }
+
+getSubTotal(): number {
+  return this.orderItems.reduce((total, item) => total + this.getTotal(item.itemPrice, item.quantity), 0);
+}
+
+getGST(): number {
+  return this.getSubTotal() * 0.05;  // 5% GST
+}
+
+getTotalAmount(): number {
+  return this.getSubTotal() + this.getGST();
+}
+
+
 }

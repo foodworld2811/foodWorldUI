@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+  }
+
+  .invoice {
+    width: 80%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  thead th {
+    background-color: #ff7e5f;
+    color: #f4f4f4;
+    text-align: left;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  tbody td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+
+  tbody tr.subtotal td,
+  tbody tr.tax td {
+    font-weight: bold;
+    background-color: #f7f7f7;
+  }
+
+  tbody tr.grand-total td {
+    font-weight: bold;
+    color: #ff7e5f;
+  }
+
+  tbody tr.grand-total td:last-child {
+    color: #ff7e5f;
+  }
+
+  tfoot td {
+    font-weight: bold;
+  }

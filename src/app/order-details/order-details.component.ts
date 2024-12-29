@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-order-details',
@@ -27,7 +29,7 @@ export class OrderDetailsComponent implements OnInit{
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private homeService:HomeService, private dialog:MatDialog,
-    private authService:AuthService,private router:Router){}
+    private authService:AuthService,private router:Router, private http : HttpClient, private cartService : CartService){}
 
   ngOnInit(){
     this.loadOrderDetails();
@@ -74,9 +76,35 @@ export class OrderDetailsComponent implements OnInit{
     
   }
 
-  openEditOrderDetails(orderId:string){
-    this.router.navigate(['/cart'],{queryParams:{orderId}})
+  openEditOrderDetails(orderId: string) {
+    const url = `http://localhost:8080/api/orders/items/${orderId}`;
+    this.http.get<any[]>(url).subscribe({
+      next: (orderItems) => {
+        console.log('Order items fetched from backend:', orderItems);
+  
+        // Transform the backend response
+        const transformedItems = orderItems.map(item => ({
+          categoryName: item.categoryName,
+          count: item.quantity, // Map 'quantity' to 'count'
+          itemId: item.itemId,
+          itemImage: item.itemImage,
+          itemName: item.itemName,
+          itemPrice: item.itemPrice,
+          itemstatus: item.itemstatus
+        }));
+  
+        console.log('Transformed order items:', transformedItems);
+  
+        // Save transformed items to storage
+        this.cartService.saveCartToStorage(transformedItems); 
+        this.router.navigate(['/home'],{queryParams:{orderId}})
+      },
+      error: (err) => {
+        console.error('Error fetching order details:', err);
+      }
+    });
   }
+  
 
   viewOrders(orderId:number){
     this.router.navigate(['view-orders'],{queryParams:{orderId}})

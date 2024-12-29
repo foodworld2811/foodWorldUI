@@ -80,7 +80,7 @@ export class HomeService {
   //   return this.http.get(`${this.apiUrl}/`)
   // }
 getOrderItems(id:number):Observable<any>{
-  return this.http.get(`${this.apiUrl}/orderItems/${id}`)
+  return this.http.get(`${this.apiUrl}/orders/items/${id}`)
 }
   getTableNumbers():Observable<any>{
     return this.http.get(`${this.apiUrl}/tables`)

@@ -15,7 +15,7 @@
                 <mat-option value="true">InStock</mat-option>
                 <mat-option value="false">OutStock</mat-option>
             </mat-select>
-            <mat-error *ngIf="categoryForm.get('isActive')?.hasError('required')">Status is required</mat-error>
+            <mat-error *ngIf="categoryForm.get('categoryStatus')?.hasError('required')">Status is required</mat-error>
         </mat-form-field>
         <div class="upload-container">
             <input class="form-control" type="file" (change)="onFileSelected($event)" />

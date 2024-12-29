@@ -40,7 +40,7 @@ export class AddSubCategoriesComponent implements OnInit {
     this.subCategoriesForm = this.fb.group({
       itemName: ['', [Validators.required,this.validateItemAlreadyExisting.bind(this)]],
       itemPrice: ['', Validators.required],
-      itemstatus: [true, Validators.required],
+      itemStatus: [true, Validators.required],
       file: ['']
     })
     this.subCategoriesForm.patchValue(this.data)
@@ -56,12 +56,13 @@ export class AddSubCategoriesComponent implements OnInit {
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
+
   addSubCategory() {
     if (this.subCategoriesForm.valid) {
       const formData = new FormData();
       formData.append('itemName', this.subCategoriesForm.get('itemName')?.value);
       formData.append('itemPrice', this.subCategoriesForm.get('itemPrice')?.value);
-      formData.append('itemstatus', this.subCategoriesForm.get('itemstatus')?.value);
+      formData.append('itemStatus', this.subCategoriesForm.get('itemStatus')?.value);
       formData.append('file', this.selectedFile);
       formData.append('categoryName', this.categoryName);
       formData.forEach((value,key) => {
@@ -69,6 +70,7 @@ export class AddSubCategoriesComponent implements OnInit {
       });
       if (this.isEditMode) {
         formData.append('id', this.data.itemId);
+        console.log("Edit Mode");
         this.homeService.updateSubCategoryItems(this.data.itemId, formData).subscribe({
           next: (res) => {
             this.authService.openSnackBar("Item Updated Successfully");

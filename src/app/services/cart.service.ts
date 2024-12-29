@@ -13,10 +13,11 @@ export class CartService {
 
   private getCartFromStorage(): any[] {
     const storedCart = localStorage.getItem('cartItems');
+    console.log("storedCart",storedCart);
     return storedCart ? JSON.parse(storedCart) : [];
   }
 
-  private saveCartToStorage(cartItems: any[]) {
+  saveCartToStorage(cartItems: any[]) {
     localStorage.setItem('cartItems', JSON.stringify(cartItems))
   }
   addItem(item: any, quantity: number) {
@@ -38,6 +39,7 @@ export class CartService {
   }
 
   getCartItems() {
+    console.log("getCartItems() called:")
     return this.cartItems.getValue;
   }
 

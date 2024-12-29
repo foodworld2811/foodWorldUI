@@ -22,11 +22,12 @@ export class CategoryComponent {
   categoryId:number = 0;
   isEditMode:any;
   constructor(private fb:FormBuilder,private homeService:HomeService, private dialogRef:MatDialogRef<CategoryComponent>,
-      private authService:AuthService, @Inject(MAT_DIALOG_DATA) public data:any) { }
+      private authService:AuthService, @Inject(MAT_DIALOG_DATA) public data:any) {
+        // console.log("category data",this.data);
+        this.isEditMode = !!data?.categoryId;
+       }
 
   ngOnInit(){
-    console.log("category data",this.data);
-    this.isEditMode = this.data.categoryId;
     
     this.homeService.getItems().subscribe({
       next:(categories)=>{
@@ -37,8 +38,11 @@ export class CategoryComponent {
         
       }
     })
+    if (this.data) {
+      this.categoryForm.patchValue(this.data)
+    }
     this.categoryForm = this.fb.group({
-      categoryStatus:['',Validators.required],
+      categoryStatus:[true ,Validators.required],
       categoryTitle:['',[Validators.required,this.validateAlreadyExistingcategory.bind(this)]],
       img:[''],
     })
@@ -65,7 +69,7 @@ export class CategoryComponent {
       });
 
       if(this.isEditMode){
-        formData.append('id',this.data.categoryId);
+        formData.append('categoryId',this.data.categoryId);
         this.homeService.updateItems(this.data.categoryId,formData).subscribe({
           next:(res)=>{
             if(res){

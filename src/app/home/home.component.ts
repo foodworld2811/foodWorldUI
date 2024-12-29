@@ -3,7 +3,6 @@ import { HomeService } from '../services/home.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { CategoryComponent } from '../category/category.component';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 
 interface CategoryItems {

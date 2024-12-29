@@ -1,6 +1,5 @@
 <app-navbar></app-navbar>
 <div class="cart-container">
-       
     <div *ngFor="let item of cartItems" class="card">
         <div class="card-body">
             <div class="row">
@@ -19,16 +18,22 @@
                 </div>
             </div>
         </div>
-
     </div>
+
     <label for="table-number">Select Table:</label>
-    <select id="table-number" class="form-control" [(ngModel)]="selectedTableNumber" > 
+    <select id="table-number" class="form-control" [(ngModel)]="selectedTableNumber" (change)="onTableSelect($event)"> 
         <option [value]="null" disabled>Select a table</option>
         <option *ngFor="let table of tableNumbers" [value]="table">{{table}}</option>
     </select>
-</div>
-<div class="checkout-button">
-    <button mat-raised-button (click)="checkout()">Checkout<mat-icon>arrow_forward</mat-icon></button>
+
+
+    <p *ngIf="tableStatus !== null && !tableStatus" class="occupied-status">
+        Table is occupied
+    </p>
 </div>
 
-<!-- onmouseover="filteredTablenumbers()" -->
+<div class="checkout-button">
+    <button mat-raised-button (click)="checkout()" [disabled]="!selectedTableNumber || cartItems.length === 0 || !tableStatus">
+        Checkout <mat-icon>arrow_forward</mat-icon>
+    </button>
+</div>

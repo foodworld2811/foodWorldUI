@@ -3,6 +3,7 @@ import { CartService } from '../services/cart.service';
 import { HomeService } from '../services/home.service';
 import { AuthService } from '../services/auth.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart',
@@ -19,8 +20,9 @@ export class CartComponent {
   itemIds: number[] = [];
   quantity: number[] = [];
   orderId:string | null = null;
+  tableStatus: boolean | null = null;
   constructor(private cartService: CartService,
-    private route:ActivatedRoute, private homeService: HomeService, private authService: AuthService, private router: Router) { }
+    private route:ActivatedRoute, private homeService: HomeService, private authService: AuthService, private router: Router, private http : HttpClient) { }
 
   ngOnInit() {
     // this.initializeCart();
@@ -28,6 +30,7 @@ export class CartComponent {
       this.orderId = params['orderId']
     })
     this.cartService.cartItems$.subscribe(items => {
+      console.log("items in cart component : ",items);
       this.cartItems = items;
     })
 
@@ -79,6 +82,7 @@ export class CartComponent {
   //     this.clearCartWithMessage();
   //   },timeRemaining)
   // }
+  
   decreaseQuantity(item: any) {
     if (item.count > 0) {
       this.cartService.updateItemQuantity(item, item.count - 1);
@@ -97,9 +101,11 @@ export class CartComponent {
     if (!this.selectedTableNumber) {
       this.authService.openSnackBar("Please select a table number before proceeding to checkout.")
       return;
-    } else if (this.cartItems.length <= 0) {
+    } else if (this.cartItems.length <= 0 ) {
       this.authService.openSnackBar("Your cart is Empty, Please Select items to contine...")
       return;
+    } else if(!this.tableStatus){
+      this.authService.openSnackBar("Table is already occupied, Please select another table number")
     }
 
     this.itemIds = this.cartItems.map(id => id.itemId)
@@ -108,8 +114,8 @@ export class CartComponent {
       next: (res) => {
         if (res) {
           this.authService.openSnackBar("Order Details Added Successfully")
-          // this.cartService.clearCart();
-          // localStorage.clear();
+          this.cartService.clearCart();
+          localStorage.clear();
           // this.selectedTableNumber = null;
           this.router.navigate(['/order-details'])
 
@@ -126,5 +132,26 @@ export class CartComponent {
 
   filteredTablenumbers(){
     
+  }
+
+  onTableSelect(event: Event): void {
+    if (this.selectedTableNumber) {
+      this.checkTableStatus(this.selectedTableNumber.toString());
+    }
+  }
+
+  checkTableStatus(tableNumber: string): void {
+    console.log('Checking table status:', tableNumber);
+    this.http
+      .get<boolean>(`http://localhost:8080/api/orders/tableStatus/${tableNumber}`)
+      .subscribe({
+        next: (status) => {
+          this.tableStatus = status;
+        },
+        error: (err) => {
+          console.error('Error checking table status:', err);
+          this.tableStatus = null; // Reset or handle error state
+        },
+      });
   }
 }
