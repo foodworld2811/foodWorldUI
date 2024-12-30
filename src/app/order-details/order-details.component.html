@@ -29,7 +29,7 @@
                     <button mat-icon-button (click)="openEditOrderDetails(row.orderId)">
                         <mat-icon color="primary">edit</mat-icon>
                     </button>
-                    <button mat-icon-button (click)="deleteOrderDetails(row.orderId)">
+                    <button mat-icon-button (click)="deleteOrderDetails(row.orderId)" *ngIf="isAdminLoggedin">
                         <mat-icon color="warn">delete</mat-icon>
                     </button>
                 </td>

@@ -1,29 +1,25 @@
-<mat-card appearance="outlined">
-    <mat-card-content>
-        <div class="login-container">
-            <div class="login-form">
-                <form [formGroup]="loginForm" (ngSubmit)="login()">
-                    <!-- <mat-radio-group formControlName="role">
-                        <mat-radio-button value="admin">Admin</mat-radio-button>
-                        <mat-radio-button value="user">User</mat-radio-button>
-                    </mat-radio-group>
-                    <br> -->
-                    <mat-form-field>
-                        <mat-label>Username</mat-label>
-                        <input matInput formControlName="username" placeholder="Enter Username">
-                        <mat-error *ngIf="Username?.errors?.['required']">Username is required</mat-error>
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field>
-                        <mat-label>Password</mat-label>
-                        <input matInput type="password" formControlName="password" placeholder="Enter your password">
-                        <mat-error *ngIf="Password?.errors?.['required']">Password is required</mat-error>
-                    </mat-form-field>
-                    <br>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <h2>Login</h2>
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username" placeholder="Enter Username">
+                    <mat-error *ngIf="Username?.errors?.['required']">Username is required</mat-error>
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" placeholder="Enter your password">
+                    <mat-error *ngIf="Password?.errors?.['required']">Password is required</mat-error>
+                </mat-form-field>
+                
+                <div class="button-group">
                     <button mat-raised-button color="primary" type="submit">Login</button>
-                    <a routerLink="/register" mat-raised-button color="accent" type="submit">New User?</a>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
-    </mat-card-content>
-</mat-card>
+    </div>
+    
+</body>

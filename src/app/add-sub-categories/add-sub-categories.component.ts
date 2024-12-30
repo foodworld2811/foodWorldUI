@@ -43,7 +43,13 @@ export class AddSubCategoriesComponent implements OnInit {
       itemStatus: [true, Validators.required],
       file: ['']
     })
-    this.subCategoriesForm.patchValue(this.data)
+    if(this.data){
+      console.log("subCategoriesForm.patchValue(this.data)",this.data);
+      this.subCategoriesForm.patchValue(this.data);
+    }
+
+    
+    
   }
 
   validateItemAlreadyExisting(control: AbstractControl){

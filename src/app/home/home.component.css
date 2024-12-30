@@ -25,7 +25,7 @@
 }
 
 .floating-button{
-    background-color: rgba(255, 68, 0, 0.712);
+    background-color: #ffbe33;
     color: white;
     border: none;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -33,7 +33,7 @@
 }
 
 .floating-button:hover{
-    background-color: orangered;
+    background-color: #fcae06;
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 .headline-text{
@@ -47,10 +47,10 @@
 }
 
 .headline-text p{
-    color: #ff7e5f;
+    color: #ffbe33;
     margin: 0;
     font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
+    font-family:  'Dancing Script', cursive;
 }
 .instructions{
     font-size: 2rem;
@@ -70,33 +70,46 @@
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
-    background-color:antiquewhite;
+    background-color:white;
   }
   .example-card:hover{
     transform: translateY(-10px);
     box-shadow: 0 4px 16px rgba(0,0,0,0.3);
   }
-  img{
-    object-fit: cover;
-    max-width: 100%;
-    height: 200px;
-    border-bottom: 2px solid #f0f0f0;
+  .image-container {
+    position: relative;
+    width: 100%;
   }
-
+  
+  .image-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  
   mat-card-header{
     padding: 10px 16px;
     /* background-color:#feb47b; */
-    border-bottom: 1px  solid #e0e0e0;
+    border-bottom: 1px  solid white;
   }
-  mat-card-title{
-    font-size: 1.8rem;
-    font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
-    color: #fa6c48;
-    margin: 0;
-    text-align: center;
-  } 
 
+  .card-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  mat-card-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family:'Courier New', Courier, monospace;
+    color: #ffbe33;
+    margin: 0;
+  }
   @media(max-width:1024px){
     .example-card{
         width: calc(100%-32px);

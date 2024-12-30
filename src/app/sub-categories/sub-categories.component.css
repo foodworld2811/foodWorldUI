@@ -6,7 +6,7 @@
 }
 
 .floating-button{
-    background-color: rgba(255, 68, 0, 0.712);
+    background-color: #ffbe33;
     color: white;
     border: none;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -14,9 +14,22 @@
 }
 
 .floating-button:hover{
-    background-color: orangered;
+    background-color: #fcb316;
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
+.headline-text{
+    text-align: center;
+    margin: 10px 0;
+    padding: 10px;
+ }
+ 
+ .headline-text p{
+     font-size: 2.6rem;
+     color: #ffbe33;
+     margin: 0;
+     font-weight: bold;
+     font-family:  'Dancing Script', cursive;
+ }
 .card-container{ 
     display: flex;
     flex-wrap: wrap;
@@ -26,23 +39,29 @@
   }
 
   .example-card{
-    width: calc(35% - 16px);
+    width: calc(26% - 16px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
-    background-color:antiquewhite;
+    background-color:#ffbe331b;
   }
   /* .example-card:hover{
     transform: translateY(-10px);
     box-shadow: 0 4px 16px rgba(0,0,0,0.3);
   } */
-  img{
-    object-fit: cover;
-    max-width: 100%;
-    height: 180px;
-    border-bottom: 1px solid #f0f0f0;
+  .image-container {
+    position: relative;
+    width: 100%;
   }
+  
+  .image-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
 
 .actions{
    flex: 1;
@@ -50,13 +69,13 @@
 mat-card-header{
     padding: 10px 16px;
     /* background-color:#feb47b; */
-    border-bottom: 1px  solid #e0e0e0;
+    border-bottom: 1px  solid white;
   }
 .card-title{
     font-size: 1.2rem;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
-    color:#fa6c48;
+    color:#ffbe33;
     margin: 0;
     text-align: center;
 
@@ -71,7 +90,7 @@ mat-card-header{
     /* text-align: left; */
     font-size: 0.9rem;
     /* font-weight: ; */
-    color: #fa6c48;
+    color: #ffbe33;
     margin: 0;
 }
 .quantity-controls{
@@ -86,7 +105,7 @@ mat-card-header{
     /* background-color: #fe572d; */
     border-radius: 30%;
     mat-icon{
-        color: #fa6c48;
+        color: #ffbe33;
     }
 }
 

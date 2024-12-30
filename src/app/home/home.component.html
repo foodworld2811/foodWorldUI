@@ -1,36 +1,26 @@
 <app-navbar></app-navbar>
-<!-- <mat-toolbar *ngIf="ismenurequired" class="tool-bar">
-    <span class="title">FoodWorld</span>
-    <a>Hi,{{username}}!!</a>
-    <div *ngIf="isAdminLoggedin">
-        <a routerLink="/user-details">User</a>
-      </div>  
-    <span class="example-spacer"></span>
-    <a (click)="logout()">Logout</a>
-  </mat-toolbar> -->
-<div class="floating-button-container" *ngIf="isAdminLoggedin">
-    <button mat-fab class="floating-button" (click)="openCategoryForm()">
-      <mat-icon>add_circle</mat-icon>
-    </button>
-  </div>
-  <div class="headline-text">
-    <p class="instructions">Select Category</p>
-  </div>
-  
-  <div class="card-container">
-    <mat-card class="example-card" appearance="outlined" *ngFor="let items of foodItemsArray, let i=index" [routerLink]="items.categoryTitle">
-      <mat-card-header>
-        <mat-card-title>{{ items.categoryTitle }}</mat-card-title>
-      </mat-card-header>
-      <img mat-card-image [src]="'data:image/png;base64,' + items.categoryimg" [alt]="items.categoryTitle">
+<section class="food_section layout_padding">
+  <div class="container">
+    <div class="floating-button-container" *ngIf="isAdminLoggedin">
+      <button mat-fab class="floating-button" (click)="openCategoryForm()">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
+    <div class="headline-text">
+      <p class="instructions">Select Category</p>
+    </div>
 
-      <div *ngIf="isAdminLoggedin">
-        <mat-card-actions class="actions">
-        <button mat-raised-button (click)="editCategoryForm(i)" color="primary">EDIT</button>
-        </mat-card-actions>
-        <!-- <button mat-raised-button (click)="deleteSubCategoryForm(i)" color="warn">DELETE</button> -->
-      </div>
-    </mat-card>
-
-
+    <div class="card-container">
+      <mat-card class="example-card" appearance="outlined" *ngFor="let items of foodItemsArray, let i=index" [routerLink]="items.categoryTitle">
+        <mat-card-header>
+          <div class="card-title-container">
+            <mat-card-title>{{ items.categoryTitle }}</mat-card-title>
+          </div>       
+        </mat-card-header>
+        <div class="image-container">
+        <img mat-card-image [src]="'data:image/png;base64,' + items.categoryimg" [alt]="items.categoryTitle">
+        </div>
+      </mat-card>
+    </div>
   </div>
+</section>

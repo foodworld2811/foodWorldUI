@@ -19,7 +19,12 @@ body {
 
   h1 {
     text-align: center;
+    margin-top: 20px;
     margin-bottom: 20px;
+    font-family: 'Dancing Script', cursive;
+    color: #ffbe33;
+    font-size: 2.6rem;
+    font-weight: bold;
   }
 
   table {
@@ -29,7 +34,7 @@ body {
   }
 
   thead th {
-    background-color: #ff7e5f;
+    background-color: #ffbe33;
     color: #f4f4f4;
     text-align: left;
     padding: 10px;
@@ -54,11 +59,11 @@ body {
 
   tbody tr.grand-total td {
     font-weight: bold;
-    color: #ff7e5f;
+    color: #ffbe33;
   }
 
   tbody tr.grand-total td:last-child {
-    color: #ff7e5f;
+    color: #ffbe33;
   }
 
   tfoot td {

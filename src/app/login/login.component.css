@@ -1,3 +1,60 @@
-a{
-    margin-left: 20px;
+/* Ensure the body takes up the entire viewport and sets the background image */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../assets/spoonful-of-spices-cooking-vwodnnl3zzdsqhbo.jpg'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif; /* Optional: Set a clean font */
+}
+
+/* Center and style the login container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow for a professional look */
+}
+
+/* Style the login form */
+.login-form {
+    width: 100%;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #3f51b5; /* Primary color */
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Material form field spacing */
+mat-form-field {
+    margin-bottom: 20px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Center the button and style it */
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+button {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
 }

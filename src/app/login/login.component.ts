@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import {  Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -16,6 +16,7 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, private router: Router,
      private _auth: AuthService) {
     sessionStorage.clear();
+    localStorage.clear();
   }
 
   ngOnInit() {
@@ -50,7 +51,9 @@ export class LoginComponent {
               sessionStorage.setItem('username', this.loginForm.value.username);
               sessionStorage.setItem('isAdminLoggedIn','true')
               this._auth.openSnackBar("Admin Login Successfully")
-              this.router.navigate(['/home'])
+              this.router.navigate(['/welcome']).then(() => {
+                window.location.reload(); })
+
             } else {
               this._auth.openSnackBar("Check admin Credentials")
             }
@@ -58,7 +61,9 @@ export class LoginComponent {
           else if (this.userdata[0].password === this.loginForm.value.password) {
             sessionStorage.setItem('username', this.loginForm.value.username);
             this._auth.openSnackBar("Logged In Successfully");
-            this.router.navigate(['/home'])
+            this.router.navigate(['/welcome']).then(() => {
+              window.location.reload(); })
+
           } else {
             this._auth.openSnackBar("Wrong Password Try Again")
           }

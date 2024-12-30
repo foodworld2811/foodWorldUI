@@ -10,9 +10,11 @@ import { SubCategoriesComponent } from './sub-categories/sub-categories.componen
 import { CartComponent } from './cart/cart.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
+  {path:'welcome',component:WelcomePageComponent},
   {path:'user/:username',component:LoginComponent},
   {path:'register',component:RegisterComponent},
   {path:'user-details',component:UserDetailsComponent},

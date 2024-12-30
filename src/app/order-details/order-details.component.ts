@@ -16,6 +16,7 @@ import { CartService } from '../services/cart.service';
   styleUrls: ['./order-details.component.css']
 })
 export class OrderDetailsComponent implements OnInit{
+  isAdminLoggedin: any;
   displayedColumns: string[]=[
     "tableNumber",
     "orderStatus",
@@ -33,6 +34,7 @@ export class OrderDetailsComponent implements OnInit{
     private authService:AuthService,private router:Router, private http : HttpClient, private cartService : CartService){}
 
   ngOnInit(){
+    this.isAdminLoggedin = sessionStorage.getItem('isAdminLoggedIn')
     this.loadOrderDetails();
   }
 

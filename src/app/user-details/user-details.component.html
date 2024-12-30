@@ -1,7 +1,10 @@
 <mat-toolbar>
     <a routerLink="/home"><mat-icon>arrow_back</mat-icon></a>
     <span class="example-spacer"></span>
-    <button mat-raised-button (click)="openAddUserForm()">ADD USER</button>
+    <div class="user-button">
+        <button mat-raised-button (click)="openAddUserForm()" style="background-color: #ffbe33;">ADD USER</button>
+    </div>
+    
 </mat-toolbar>
 
 <div class="main-body">

@@ -36,6 +36,7 @@ import { CartComponent } from './cart/cart.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ViewOrdersComponent } from './view-orders/view-orders.component';
     CartComponent,
     OrderDetailsComponent,
     ViewOrdersComponent,
+    WelcomePageComponent,
     
   ],
   imports: [
