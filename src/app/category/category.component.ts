@@ -84,8 +84,6 @@ export class CategoryComponent {
       }else{
         this.homeService.addItems(formData).subscribe({
           next:(res)=>{
-            // console.log(res);
-            // this.existingCategoryItems = res;
             this.authService.openSnackBar("Category Added Successfully","Done")
             this.dialogRef.close(true)
           },
@@ -93,11 +91,7 @@ export class CategoryComponent {
             console.log(err);
             this.authService.openSnackBar("Failed to Add Category","Error")
           }
-  
       });
-  
       }
-      
-   
   }}
 }

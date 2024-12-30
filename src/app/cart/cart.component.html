@@ -26,7 +26,6 @@
         <option *ngFor="let table of tableNumbers" [value]="table">{{table}}</option>
     </select>
 
-
     <p *ngIf="tableStatus !== null && !tableStatus" class="occupied-status">
         Table is occupied
     </p>

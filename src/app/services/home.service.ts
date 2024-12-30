@@ -68,6 +68,13 @@ export class HomeService {
     return this.http.post(`${this.apiUrl}/orders`, null, { params });
   }
 
+  updateOrderDetails(orderId: string, itemIds: number[], quantities: number[]): Observable<any> {
+    const params = new HttpParams()
+      .set('itemIds', itemIds.join(','))
+      .set('quantities', quantities.join(','))
+    return this.http.put(`${this.apiUrl}/orders/${orderId}`, null, { params });
+  }
+
   getOrderDetails():Observable<any>{
     return this.http.get(`${this.apiUrl}/orders`);
   }

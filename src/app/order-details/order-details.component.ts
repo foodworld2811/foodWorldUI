@@ -22,6 +22,7 @@ export class OrderDetailsComponent implements OnInit{
     "orderAction",
     "actions",
   ]
+  
 
   dataSource!:MatTableDataSource<any>;
 
@@ -90,14 +91,18 @@ export class OrderDetailsComponent implements OnInit{
           itemImage: item.itemImage,
           itemName: item.itemName,
           itemPrice: item.itemPrice,
-          itemstatus: item.itemstatus
+          itemstatus: item.itemstatus,
+          tableNumber: item.tableNumber,
+          orderId: item.orderId
         }));
   
         console.log('Transformed order items:', transformedItems);
   
         // Save transformed items to storage
         this.cartService.saveCartToStorage(transformedItems); 
-        this.router.navigate(['/home'],{queryParams:{orderId}})
+        this.router.navigate(['/home'],{queryParams:{orderId}}).then(() => {
+          window.location.reload();
+        });
       },
       error: (err) => {
         console.error('Error fetching order details:', err);
