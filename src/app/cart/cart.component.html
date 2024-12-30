@@ -20,10 +20,15 @@
         </div>
     </div>
 
-    <label for="table-number">Select Table:</label>
+    <!-- <label for="table-number">Select Table:</label>
     <select id="table-number" class="form-control" [(ngModel)]="selectedTableNumber" (change)="onTableSelect($event)"> 
         <option [value]="null" disabled>Select a table</option>
         <option *ngFor="let table of tableNumbers" [value]="table">{{table}}</option>
+    </select> -->
+    <label for="table-number">Select Table:</label>
+    <select id="table-number" class="form-control" [(ngModel)]="selectedTableNumber" (change)="onTableSelect($event)" [disabled]="isTableSelected">
+      <option [value]="null" disabled>Select a table</option>
+      <option *ngFor="let table of tableNumbers" [value]="table">{{ table }}</option>
     </select>
 
     <p *ngIf="tableStatus !== null && !tableStatus" class="occupied-status">

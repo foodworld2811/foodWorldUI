@@ -34,6 +34,11 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.cartService.cartItems$.subscribe(items => {
       this.orderId = items[0]?.orderId;
+      const storedTableNumber = items[0]?.tableNumber;
+      if (storedTableNumber) {
+        this.selectedTableNumber = storedTableNumber; // Set the selected table number
+        this.isTableSelected = true; // Disable the select field
+      }
       this.cartItems = items;
       console.log("orderId in cart component : ", this.orderId);
     });
@@ -69,7 +74,7 @@ export class CartComponent implements OnInit {
     } else if (this.cartItems.length <= 0) {
       this.authService.openSnackBar("Your cart is Empty, Please Select items to continue...");
       return;
-    } else if (!this.tableStatus) {
+    } else if (!this.orderId && !this.tableStatus) {
       this.authService.openSnackBar("Table is already occupied, Please select another table number");
       return;
     }
