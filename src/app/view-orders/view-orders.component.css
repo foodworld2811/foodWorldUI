@@ -69,3 +69,31 @@ body {
   tfoot td {
     font-weight: bold;
   }
+
+  .back-icon button{
+    background-color: #ffbe33;
+    color: white;
+  }
+
+  .close-order{
+    display: flex;
+    justify-content: right;
+    margin: 20px;
+  }
+  
+  .close-order button{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    /* font-weight: bold; */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #faae0a, #ffbe33);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  

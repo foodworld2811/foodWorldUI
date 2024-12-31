@@ -17,6 +17,7 @@ import { CartService } from '../services/cart.service';
 })
 export class OrderDetailsComponent implements OnInit{
   isAdminLoggedin: any;
+  userName : any;
   displayedColumns: string[]=[
     "tableNumber",
     "orderStatus",
@@ -35,7 +36,18 @@ export class OrderDetailsComponent implements OnInit{
 
   ngOnInit(){
     this.isAdminLoggedin = sessionStorage.getItem('isAdminLoggedIn')
-    this.loadOrderDetails();
+    const username = sessionStorage.getItem('username');
+    if (username) {
+      this.userName = username;
+    } else {
+      console.log('No username found in sessionStorage.');
+    }
+
+    if(this.isAdminLoggedin === 'true'){
+      this.loadOrderDetails();
+    }else{      
+    this.getOrderDetailsByUserName();
+    }
   }
 
   loadOrderDetails(){
@@ -116,4 +128,18 @@ export class OrderDetailsComponent implements OnInit{
   viewOrders(orderId:number){
     this.router.navigate(['view-orders'],{queryParams:{orderId}})
   }
+
+  getOrderDetailsByUserName(){
+    console.log("getOrderDetailsByUserName method called",this.userName);
+    this.homeService.getOrderDetailsByUserName(this.userName).subscribe({
+      next:(res)=>{
+        console.log("getOrderDetailsByUserName",res);
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error:(err)=>{
+        console.log(err);
+  }
+})}
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 import { HomeService} from '../services/home.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-view-orders',
@@ -9,9 +10,10 @@ import { HomeService} from '../services/home.service';
 })
 export class ViewOrdersComponent implements OnInit{
 
-constructor(private route:ActivatedRoute,private homeService:HomeService){}
-  orderId!: number; 
+constructor(private route:ActivatedRoute,private homeService:HomeService,private authService:AuthService){}
+  orderId!: any; 
   orderItems: any[] = [];
+  orderStatus:any = 'COMPLETED'
 ngOnInit(){
   this.route.queryParams.subscribe(params => {
     this.orderId = +params['orderId']; 
@@ -21,7 +23,6 @@ ngOnInit(){
 }
 
 getTotal(price: number, quantity: number): number {
-  console.log('Price:', price, 'Quantity:', quantity);
   return price * quantity;
 }
 
@@ -48,6 +49,21 @@ getGST(): number {
 getTotalAmount(): number {
   return this.getSubTotal() + this.getGST();
 }
+placeOrderStatus(){
+  console.log("orderId,orderStatus",this.orderId,this.orderStatus);
+  
+  this.homeService.updateOrderStatus(this.orderId,this.orderStatus).subscribe({
+    next:(res)=>{
+      if(res){
+        this.authService.openSnackBar("Order Placed Successfully");
 
+      }
+    },
+    error:(err)=>{
+      console.log(err);
+      
+    }
+  })
+}
 
 }

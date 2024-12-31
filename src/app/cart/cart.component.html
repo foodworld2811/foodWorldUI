@@ -1,4 +1,7 @@
 <app-navbar></app-navbar>
+<div *ngIf="isLoading" class="spinner-overlay">
+    <div class="spinner"></div>
+</div>
 <div class="cart-container">
     <div *ngFor="let item of cartItems" class="card">
         <div class="card-body">
@@ -37,7 +40,7 @@
 </div>
 
 <div class="checkout-button">
-    <button mat-raised-button (click)="checkout()" [disabled]="!selectedTableNumber || cartItems.length === 0 || !tableStatus">
+    <button mat-raised-button (click)="checkout()" [disabled]=" cartItems.length === 0 ">
         Checkout <mat-icon>arrow_forward</mat-icon>
     </button>
 </div>

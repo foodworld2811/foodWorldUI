@@ -1,14 +1,10 @@
-<mat-toolbar>
-    <a routerLink="/home"><mat-icon>arrow_back</mat-icon></a>
-    <span class="example-spacer"></span>
-    <div class="user-button">
-        <button mat-raised-button (click)="openAddUserForm()" style="background-color: #ffbe33;">ADD USER</button>
-    </div>
-    
-</mat-toolbar>
+<app-navbar></app-navbar>
 
 <div class="main-body">
     <h1>User Details</h1>
+    <div class="button-container">
+        <button mat-raised-button (click)="openAddUserForm()" style="background-color: #ffbe33;">ADD USER</button>
+    </div>
     <mat-form-field>
         <mat-label>Filter</mat-label>
         <input matInput #input (keyup)="applyFilter($event)" placeholder="ex. Bhavya">

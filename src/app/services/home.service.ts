@@ -75,6 +75,12 @@ export class HomeService {
     return this.http.put(`${this.apiUrl}/orders/${orderId}`, null, { params });
   }
 
+  updateOrderStatus(orderId: number, orderStatus: string): Observable<any> {
+    console.log("Service order status", orderStatus);
+    return this.http.put(`${this.apiUrl}/orders/status/${orderId}?orderStatus=${orderStatus}`, {});
+  }
+  
+
   getOrderDetails():Observable<any>{
     return this.http.get(`${this.apiUrl}/orders`);
   }
@@ -82,7 +88,9 @@ export class HomeService {
   deleteOrder(id:number):Observable<any>{
     return this.http.delete(`${this.apiUrl}/orders/${id}`);
   }
-
+  getOrderDetailsByUserName(userName:string):Observable<any>{
+    return this.http.get(`${this.apiUrl}/orders/user/${userName}`)
+}
   // getSavedcartItems():Observable<any>{
   //   return this.http.get(`${this.apiUrl}/`)
   // }
