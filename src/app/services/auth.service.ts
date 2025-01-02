@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  
+  apiUrl = "https://foodworldbe1.onrender.com"
   constructor(private _snackBar:MatSnackBar, private _http:HttpClient) { }
 
   openSnackBar(message:any, action: any = 'OK'){
@@ -17,22 +17,22 @@ export class AuthService {
   }
 
   addUser(data: any):Observable<any>{
-    return this._http.post('http://localhost:8080/api/users',data)
+    return this._http.post(`${this.apiUrl}/users`,data)
   }
 
   getUsers():Observable<any>{
-    return this._http.get('http://localhost:3000/user')
+    return this._http.get(`${this.apiUrl}/users`)
   }
 
   updateUserDetails(id:number,data:any):Observable<any>{
-    return this._http.put(`http://localhost:8080/api/users/${id}`,data)
+    return this._http.put(`${this.apiUrl}/users/${id}`,data)
   }
 
   deleteUser(id:number):Observable<any>{
-    return this._http.delete(`http://localhost:8080/api/users/${id}`)
+    return this._http.delete(`${this.apiUrl}/users/${id}`)
   }
   Islogged(data: any):Observable<any>{
-      return this._http.post("http://localhost:8080/api/login",data);
+      return this._http.post(`${this.apiUrl}/login`,data);
      }
 
   loggedIn(){
