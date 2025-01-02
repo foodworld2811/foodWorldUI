@@ -1,3 +1,4 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
 <app-navbar></app-navbar>
 <section class="food_section layout_padding">
   <div class="container">
@@ -7,7 +8,7 @@
       </button>
     </div>
     <div class="headline-text">
-      <p class="instructions">Select Category</p>
+      <p class="instructions">Select Category<mat-icon style="color: #ffbe33;"> restaurant_menu</mat-icon></p>
     </div>
 
     <div class="card-container">

@@ -23,6 +23,7 @@ export class CartComponent implements OnInit {
   tableStatus: boolean | null = null;
   isTableSelected: boolean = false; // This will control whether the dropdown is disabled or not
   isLoading: boolean = false;
+  createdBy : any;
 
   constructor(
     private cartService: CartService,
@@ -51,9 +52,13 @@ export class CartComponent implements OnInit {
         console.log("tableNumbers", this.tableNumbers);
       }
     });
-    console.log("Selected Table:", this.selectedTableNumber);
-console.log("Cart Items:", this.cartItems);
-console.log("Table Status:", this.tableStatus);
+    const username = sessionStorage.getItem('username');
+    if (username) {
+      this.createdBy = username;
+      console.log('Username:', username);
+    } else {
+      console.log('No username found in sessionStorage.');
+}
   }
 
   decreaseQuantity(item: any) {
@@ -105,7 +110,7 @@ console.log("Table Status:", this.tableStatus);
       });
     } else {
       console.log("Save Order Details");
-      this.homeService.saveOrderDetails(this.itemIds, this.quantity, this.selectedTableNumber).subscribe({
+      this.homeService.saveOrderDetails(this.itemIds, this.quantity, this.selectedTableNumber,this.createdBy).subscribe({
         next: (res) => {
           this.isLoading = false;
           if (res) {
@@ -130,9 +135,7 @@ console.log("Table Status:", this.tableStatus);
   }
 
   checkTableStatus(tableNumber: string): void {
-    console.log('Checking table status:', tableNumber);
-    this.http
-      .get<boolean>(`http://localhost:8080/api/orders/tableStatus/${tableNumber}`)
+    this.homeService.checkTableStatusByTableNumber(tableNumber)
       .subscribe({
         next: (status) => {
           this.tableStatus = status;

@@ -14,19 +14,19 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
-  {path:'welcome',component:WelcomePageComponent},
+  {path:'welcome',component:WelcomePageComponent,canActivate:[AuthGuard]},
   {path:'user/:username',component:LoginComponent},
   {path:'register',component:RegisterComponent},
-  {path:'user-details',component:UserDetailsComponent},
+  {path:'user-details',component:UserDetailsComponent,canActivate:[AuthGuard]},
   {path:'home',
     component:HomeComponent,
     canActivate:[AuthGuard] 
   },
-  {path:'home/:category',component:SubCategoriesComponent},
-  {path:'order-details',component:OrderDetailsComponent},
-  {path:'view-orders',component:ViewOrdersComponent},
+  {path:'home/:category',component:SubCategoriesComponent,canActivate:[AuthGuard]},
+  {path:'order-details',component:OrderDetailsComponent,canActivate:[AuthGuard]},
+  {path:'view-orders',component:ViewOrdersComponent,canActivate:[AuthGuard]},
   {path:'cart',component:CartComponent,canActivate:[AuthGuard]},
-  {path:'',redirectTo:'/login',pathMatch:'full'}
+  {path:'**',redirectTo:'/login',pathMatch:'full'}
 ];
 
 @NgModule({

@@ -37,6 +37,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
     OrderDetailsComponent,
     ViewOrdersComponent,
     WelcomePageComponent,
+    SpinnerComponent,
     
   ],
   imports: [

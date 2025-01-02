@@ -11,6 +11,20 @@ body {
     background-repeat: no-repeat;
     font-family: Arial, sans-serif; /* Optional: Set a clean font */
 }
+.headline-container {
+    position: absolute;
+    top: 20px; /* Position the headline near the top of the page */
+    width: 100%;
+    text-align: center;
+}
+
+.headline {
+    font-family:'Dancing Script', cursive ;
+    font-size: 36px;
+    font-weight: bold;
+    color: #ffffff; /* White text for contrast */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Add a shadow for better readability */
+}
 
 /* Center and style the login container */
 .login-container {

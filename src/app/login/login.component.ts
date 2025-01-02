@@ -1,4 +1,4 @@
-import {  Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -8,13 +8,14 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
   loginForm!: FormGroup;
   userdata: any;
-  isAdminLoggedIn= false;
+  isAdminLoggedIn = false;
+  isLoading: boolean = false;
   constructor(private fb: FormBuilder, private router: Router,
-     private _auth: AuthService) {
+    private _auth: AuthService) {
     sessionStorage.clear();
     localStorage.clear();
   }
@@ -26,9 +27,6 @@ export class LoginComponent {
     })
   }
 
-  // validemail(){
-
-  // }
   get Username() {
     return this.loginForm.get('username');
   }
@@ -39,38 +37,44 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.valid) {
-      this._auth.Islogged(this.loginForm.value.username).subscribe({
+      this.isLoading = true;
+      this._auth.Islogged(this.loginForm.value).subscribe({
         next: (res) => {
-          this.userdata = res;
-          console.log(this.userdata[0].username);
-
-          // console.log(this.userdata); 
-          if (this.userdata[0].username === 'admin123') {
-            if (this.userdata[0].password === this.loginForm.value.password) {
+          this.isLoading = false;
+          if (res) {
+            this.userdata = res;
+            if (this.userdata.username === 'admin123') {
               this.isAdminLoggedIn = true;
               sessionStorage.setItem('username', this.loginForm.value.username);
-              sessionStorage.setItem('isAdminLoggedIn','true')
-              this._auth.openSnackBar("Admin Login Successfully")
+              sessionStorage.setItem('isAdminLoggedIn', 'true');
+              this._auth.openSnackBar("Admin Login Successfully");
               this.router.navigate(['/welcome']).then(() => {
-                window.location.reload(); })
-
+                window.location.reload();
+              });
             } else {
-              this._auth.openSnackBar("Check admin Credentials")
+              sessionStorage.setItem('username', this.loginForm.value.username);
+              this._auth.openSnackBar("Logged In Successfully");
+              this.router.navigate(['/welcome']).then(() => {
+                window.location.reload();
+              });
             }
-          }
-          else if (this.userdata[0].password === this.loginForm.value.password) {
-            sessionStorage.setItem('username', this.loginForm.value.username);
-            this._auth.openSnackBar("Logged In Successfully");
-            this.router.navigate(['/welcome']).then(() => {
-              window.location.reload(); })
-
           } else {
-            this._auth.openSnackBar("Wrong Password Try Again")
+            this._auth.openSnackBar("Invalid Credentials", "Try Again");
+          }
+        },
+        error: (err) => {
+          this.isLoading = false;
+          if (err.status === 401) {
+            this._auth.openSnackBar("Invalid Credentials", "Try Again");
+          } else {
+            console.error(err);
+            this._auth.openSnackBar("An error occurred", "Please try again later");
           }
         }
-
-      }
-      )
+      });
+    } else {
+      this._auth.openSnackBar("Please fill in all required fields", "Try Again");
     }
   }
+  
 }

@@ -60,11 +60,12 @@ export class HomeService {
     return this.http.put(`${this.apiUrl}/categoryItems/${id}`, data)
   }
 
-  saveOrderDetails(itemIds: number[], quantities: number[], tableNumber: any): Observable<any> {
+  saveOrderDetails(itemIds: number[], quantities: number[], tableNumber: any,createdBy:any): Observable<any> {
     const params = new HttpParams()
       .set('itemIds', itemIds.join(','))
       .set('quantities', quantities.join(','))
       .set('tableNumber', tableNumber)
+      .set('createdBy',createdBy)
     return this.http.post(`${this.apiUrl}/orders`, null, { params });
   }
 
@@ -84,6 +85,9 @@ export class HomeService {
   getOrderDetails():Observable<any>{
     return this.http.get(`${this.apiUrl}/orders`);
   }
+  getOrderDetailsByOrderId(orderId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/orders/items/${orderId}`);
+  }
 
   deleteOrder(id:number):Observable<any>{
     return this.http.delete(`${this.apiUrl}/orders/${id}`);
@@ -91,9 +95,9 @@ export class HomeService {
   getOrderDetailsByUserName(userName:string):Observable<any>{
     return this.http.get(`${this.apiUrl}/orders/user/${userName}`)
 }
-  // getSavedcartItems():Observable<any>{
-  //   return this.http.get(`${this.apiUrl}/`)
-  // }
+ checkTableStatusByTableNumber(tableNumber:string):Observable<any>{
+  return this.http.get(`${this.apiUrl}/orders/tableStatus/${tableNumber}`)
+ }
 getOrderItems(id:number):Observable<any>{
   return this.http.get(`${this.apiUrl}/orders/items/${id}`)
 }

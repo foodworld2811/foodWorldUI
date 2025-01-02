@@ -12,6 +12,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent {
+  isLoading: boolean = false;
 displayedColumns: string[]=[
   "id",
       "firstname",
@@ -42,8 +43,10 @@ dataSource!: MatTableDataSource<any>;
   }
 
   getUserDetails(){
+    this.isLoading = true;
     this.authService.getUsers().subscribe({
       next:(data)=>{
+        this.isLoading = false;
         this.dataSource =  new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;

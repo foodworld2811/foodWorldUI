@@ -11,7 +11,8 @@ import { HomeService } from '../services/home.service';
 })
 export class WelcomePageComponent implements OnInit{
   isAdminLoggedin:any;
-  totalItemsCount!:number
+  totalItemsCount!:number;
+  
   constructor(private router:Router,private cartService:CartService,private homeService:HomeService){
     homeService.isAdmin$.subscribe(isAdmin=>{
       this.isAdminLoggedin = isAdmin;

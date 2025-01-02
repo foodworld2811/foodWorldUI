@@ -1,7 +1,9 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
 <app-navbar></app-navbar>
-<div *ngIf="isLoading" class="spinner-overlay">
+
+<!-- <div *ngIf="isLoading" class="spinner-overlay">
     <div class="spinner"></div>
-</div>
+</div> -->
 <div class="cart-container">
     <div *ngFor="let item of cartItems" class="card">
         <div class="card-body">

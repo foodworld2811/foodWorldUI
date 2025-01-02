@@ -16,6 +16,7 @@ export class AddSubCategoriesComponent implements OnInit {
   categoryName: string;
   isEditMode: boolean = false;
   existingItems: string[]=[];
+  isLoading: boolean = false;
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddSubCategoriesComponent>,
     private homeService: HomeService, private authService: AuthService,
@@ -28,8 +29,10 @@ export class AddSubCategoriesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.homeService.getSubCategoryItems().subscribe({
       next:(res)=>{
+        this.isLoading=false;
         this.existingItems = res.map((items:any)=>items.itemName.toLowerCase());
       },
       error:(err)=>{
@@ -77,17 +80,21 @@ export class AddSubCategoriesComponent implements OnInit {
       if (this.isEditMode) {
         formData.append('id', this.data.itemId);
         console.log("Edit Mode");
+        this.isLoading= true;
         this.homeService.updateSubCategoryItems(this.data.itemId, formData).subscribe({
           next: (res) => {
+            this.isLoading = false;
             this.authService.openSnackBar("Item Updated Successfully");
             this.dialogRef.close(true);
 
           }
         })
       } else {
+        this.isLoading = true;
         this.homeService.addsubCategoryItems(formData).subscribe({
           next: (res) => {
             // console.log(res);
+            this.isLoading=false;
 
             this.authService.openSnackBar("Item Added Successfully", "Done")
             this.dialogRef.close(true)

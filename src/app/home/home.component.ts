@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   ismenurequired=false;
   username:string='';
   isAdminLoggedin :any;
-  
+  isLoading: boolean = false;
   constructor(
     private homeService: HomeService,
     private _dialog: MatDialog,
@@ -45,8 +45,10 @@ export class HomeComponent implements OnInit {
     }
    }  
   private getCategoryList(): void {
+    this.isLoading=true;
     this.homeService.getItems().subscribe(
       (response) => {
+        this.isLoading=false;
         this.foodItemsArray = response;
       },
       (error) => {

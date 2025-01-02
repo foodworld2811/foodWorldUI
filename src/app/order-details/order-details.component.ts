@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from '../services/cart.service';
 
+
+
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',
@@ -18,6 +20,8 @@ import { CartService } from '../services/cart.service';
 export class OrderDetailsComponent implements OnInit{
   isAdminLoggedin: any;
   userName : any;
+  isLoading: boolean = false;
+  orderItems:any[] = [];
   displayedColumns: string[]=[
     "tableNumber",
     "orderStatus",
@@ -51,8 +55,10 @@ export class OrderDetailsComponent implements OnInit{
   }
 
   loadOrderDetails(){
+    this.isLoading = true;
     this.homeService.getOrderDetails().subscribe({
       next:(res)=>{
+        this.isLoading=false;
         console.log("getOrderDetails",res);
         
         this.dataSource = new MatTableDataSource(res);
@@ -78,8 +84,10 @@ export class OrderDetailsComponent implements OnInit{
     const dialogRef = this.dialog.open(ConfirmDialogComponent)
     dialogRef.afterClosed().subscribe((confirm)=>{
       if(confirm){
+        this.isLoading = true;
         this.homeService.deleteOrder(id).subscribe({
           next:(res)=>{
+            this.isLoading= false;
             this.authService.openSnackBar("Order Deleted Successfully")
             this.loadOrderDetails();
           }
@@ -91,14 +99,14 @@ export class OrderDetailsComponent implements OnInit{
     
   }
 
-  openEditOrderDetails(orderId: string) {
-    const url = `http://localhost:8080/api/orders/items/${orderId}`;
-    this.http.get<any[]>(url).subscribe({
-      next: (orderItems) => {
-        console.log('Order items fetched from backend:', orderItems);
-  
+  openEditOrderDetails(orderId: number) {
+    this.homeService.getOrderDetailsByOrderId(orderId).subscribe({
+      next: (order) => {
+        console.log('Order items fetched from backend:', order);
+        this.orderItems = order;
         // Transform the backend response
-        const transformedItems = orderItems.map(item => ({
+
+        const transformedItems = this.orderItems.map((item:any) => ({
           categoryName: item.categoryName,
           count: item.quantity, // Map 'quantity' to 'count'
           itemId: item.itemId,
@@ -118,7 +126,7 @@ export class OrderDetailsComponent implements OnInit{
           window.location.reload();
         });
       },
-      error: (err) => {
+      error: (err:any) => {
         console.error('Error fetching order details:', err);
       }
     });

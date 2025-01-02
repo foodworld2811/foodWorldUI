@@ -31,9 +31,10 @@ export class AuthService {
   deleteUser(id:number):Observable<any>{
     return this._http.delete(`http://localhost:8080/api/users/${id}`)
   }
-  Islogged(username: string):Observable<any>{
-    return this._http.get(`http://localhost:3000/user?username=${username}`);
-  }
+  Islogged(data: any):Observable<any>{
+      return this._http.post("http://localhost:8080/api/login",data);
+     }
+
   loggedIn(){
     return sessionStorage.getItem('username')!=null;
   }
