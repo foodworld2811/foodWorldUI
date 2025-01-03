@@ -1,16 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { HomeService } from '../services/home.service';
-import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { CartService } from '../services/cart.service';
-
-
+import { HomeService } from '../services/home.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-details',
@@ -59,8 +57,6 @@ export class OrderDetailsComponent implements OnInit{
     this.homeService.getOrderDetails().subscribe({
       next:(res)=>{
         this.isLoading=false;
-        console.log("getOrderDetails",res);
-        
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -102,10 +98,7 @@ export class OrderDetailsComponent implements OnInit{
   openEditOrderDetails(orderId: number) {
     this.homeService.getOrderDetailsByOrderId(orderId).subscribe({
       next: (order) => {
-        console.log('Order items fetched from backend:', order);
         this.orderItems = order;
-        // Transform the backend response
-
         const transformedItems = this.orderItems.map((item:any) => ({
           categoryName: item.categoryName,
           count: item.quantity, // Map 'quantity' to 'count'
@@ -117,10 +110,6 @@ export class OrderDetailsComponent implements OnInit{
           tableNumber: item.tableNumber,
           orderId: item.orderId
         }));
-  
-        console.log('Transformed order items:', transformedItems);
-  
-        // Save transformed items to storage
         this.cartService.saveCartToStorage(transformedItems); 
         this.router.navigate(['/home'],{queryParams:{orderId}}).then(() => {
           window.location.reload();
@@ -138,10 +127,8 @@ export class OrderDetailsComponent implements OnInit{
   }
 
   getOrderDetailsByUserName(){
-    console.log("getOrderDetailsByUserName method called",this.userName);
     this.homeService.getOrderDetailsByUserName(this.userName).subscribe({
       next:(res)=>{
-        console.log("getOrderDetailsByUserName",res);
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -150,4 +137,5 @@ export class OrderDetailsComponent implements OnInit{
         console.log(err);
   }
 })}
+
 }

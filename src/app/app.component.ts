@@ -11,23 +11,12 @@ import { HomeService } from './services/home.service';
 })
 export class AppComponent{
   title = 'Rest-App';
-  // ismenurequired=false;
-  // username:string='';
-  // isAdminLoggedin:boolean = false;
+  
   constructor(private router:Router,
     private homeService:HomeService,
   private cdr: ChangeDetectorRef){
-    // this.username = sessionStorage.getItem('username') || '';
-    // this.isAdminLoggedin = sessionStorage.getItem('isAdminLoggedIn') === 'true';
+  
   }
-  // ngDoCheck(): void {
-  //  const currentUrl = this.router.url;
-  //  if(currentUrl=='/login' || currentUrl=='/register' || currentUrl =='/user-details'){
-  //   this.ismenurequired=false
-  //  }else{
-  //   this.ismenurequired=true;
-  //  }
-  // }  
     
     
 }

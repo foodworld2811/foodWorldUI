@@ -20,8 +20,6 @@ export class NavbarComponent {
   constructor(private router:Router, private _dialog:MatDialog,
     private homeService:HomeService,
   private cdr: ChangeDetectorRef,private cartService:CartService){
-    // this.isAdminLoggedin = sessionStorage.getItem('isAdminLoggedIn')
-    // this.username = sessionStorage.getItem('username') || '';
     homeService.username$.subscribe(name=>{
       this.username=name;
     })

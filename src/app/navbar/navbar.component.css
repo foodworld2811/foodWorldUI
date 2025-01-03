@@ -1,76 +1,19 @@
 
-  @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
+  /* @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap"); */
+  @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Open+Sans:wght@400&display=swap");
+
   body {
     font-family: "Open Sans", sans-serif;
     color: #0c0c0c;
     background-color: #ffffff;
     overflow-x: hidden;
   }
-  
-  .layout_padding {
-    padding: 90px 0;
-  }
-  
-  .layout_padding2 {
-    padding: 75px 0;
-  }
-  
-  .layout_padding2-top {
-    padding-top: 75px;
-  }
-  
-  .layout_padding2-bottom {
-    padding-bottom: 75px;
-  }
-  
-  .layout_padding-top {
-    padding-top: 90px;
-  }
-  
-  .layout_padding-bottom {
-    padding-bottom: 90px;
-  }
-  
+
   h1,
   h2 {
     font-family: 'Dancing Script', cursive;
   }
   
-  .heading_container {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-  }
-  
-  .heading_container h2 {
-    position: relative;
-    margin-bottom: 0;
-    font-size: 2.5rem;
-    font-weight: bold;
-  }
-  
-  .heading_container h2 span {
-    color: #ffbe33;
-  }
-  
-  .heading_container p {
-    margin-top: 10px;
-    margin-bottom: 0;
-  }
-  
-  .heading_container.heading_center {
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    text-align: center;
-  }
   
   a,
   a:hover,
@@ -179,19 +122,7 @@
       color: #ffbe33;
     }
     
-    .custom_nav-container .nav_search-btn {
-      width: auto;
-      height: auto;
-      padding: 0;
-      border: none;
-      color: #ffffff;
-      margin: 0 10px;
-    }
-    
-    .custom_nav-container .nav_search-btn:hover {
-      color: #ffbe33;
-    }
-    
+  
     .user_option {
       display: -webkit-box;
       display: -ms-flexbox;
@@ -206,14 +137,7 @@
       padding: 10px;
     }
     
-    .user_option .user_link {
-      color: #ffffff;
-    }
-    
-    .user_option .user_link:hover {
-      color: #ffbe33;
-    }
-    
+  
     .user_option .cart_link {
       display: -webkit-box;
       display: -ms-flexbox;
@@ -233,9 +157,7 @@
       margin-bottom: 2px;
     }
     
-    .user_option .cart_link:hover svg {
-      fill: #ffbe33;
-    }
+   
     
     .user_option .order_online {
       display: inline-block;
@@ -248,9 +170,7 @@
       border: none;
     }
     
-    .user_option .order_online:hover {
-      background-color: #e69c00;
-    }
+   
     
     .custom_nav-container .navbar-toggler {
       outline: none;

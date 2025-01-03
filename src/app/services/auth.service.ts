@@ -32,7 +32,7 @@ export class AuthService {
     return this._http.delete(`${this.apiUrl}/users/${id}`)
   }
   Islogged(data: any):Observable<any>{
-      return this._http.post(`${this.apiUrl}/login`,data);
+      return this._http.post(`http://localhost:8080/api/login`,data);
      }
 
   loggedIn(){

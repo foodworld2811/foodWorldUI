@@ -15,7 +15,7 @@ export class AddSubCategoriesComponent implements OnInit {
   selectedFile!: File;
   categoryName: string;
   isEditMode: boolean = false;
-  existingItems: string[]=[];
+  existingItems: string[] = [];
   isLoading: boolean = false;
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddSubCategoriesComponent>,
@@ -31,33 +31,33 @@ export class AddSubCategoriesComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this.homeService.getSubCategoryItems().subscribe({
-      next:(res)=>{
-        this.isLoading=false;
-        this.existingItems = res.map((items:any)=>items.itemName.toLowerCase());
+      next: (res) => {
+        this.isLoading = false;
+        this.existingItems = res.map((items: any) => items.itemName.toLowerCase());
       },
-      error:(err)=>{
+      error: (err) => {
         console.log("Failed to fetch Items Data");
-        
+
       }
     })
     this.subCategoriesForm = this.fb.group({
-      itemName: ['', [Validators.required,this.validateItemAlreadyExisting.bind(this)]],
+      itemName: ['', [Validators.required, this.validateItemAlreadyExisting.bind(this)]],
       itemPrice: ['', Validators.required],
       itemStatus: [true, Validators.required],
       file: ['']
     })
-    if(this.data){
-      console.log("subCategoriesForm.patchValue(this.data)",this.data);
+    if (this.data) {
+      console.log("subCategoriesForm.patchValue(this.data)", this.data);
       this.subCategoriesForm.patchValue(this.data);
     }
 
-    
-    
+
+
   }
 
-  validateItemAlreadyExisting(control: AbstractControl){
-    if(this.existingItems.includes(control.value?.toLowerCase())){
-      return {itemExists:true}
+  validateItemAlreadyExisting(control: AbstractControl) {
+    if (this.existingItems.includes(control.value?.toLowerCase())) {
+      return { itemExists: true }
     }
     return null;
   }
@@ -74,13 +74,12 @@ export class AddSubCategoriesComponent implements OnInit {
       formData.append('itemStatus', this.subCategoriesForm.get('itemStatus')?.value);
       formData.append('file', this.selectedFile);
       formData.append('categoryName', this.categoryName);
-      formData.forEach((value,key) => {
-        console.log(key+' '+value);
+      formData.forEach((value, key) => {
+        console.log(key + ' ' + value);
       });
       if (this.isEditMode) {
         formData.append('id', this.data.itemId);
-        console.log("Edit Mode");
-        this.isLoading= true;
+        this.isLoading = true;
         this.homeService.updateSubCategoryItems(this.data.itemId, formData).subscribe({
           next: (res) => {
             this.isLoading = false;
@@ -93,9 +92,7 @@ export class AddSubCategoriesComponent implements OnInit {
         this.isLoading = true;
         this.homeService.addsubCategoryItems(formData).subscribe({
           next: (res) => {
-            // console.log(res);
-            this.isLoading=false;
-
+            this.isLoading = false;
             this.authService.openSnackBar("Item Added Successfully", "Done")
             this.dialogRef.close(true)
           },

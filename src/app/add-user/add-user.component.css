@@ -1,28 +1,31 @@
-.title-container{
+.title-container {
     text-align: center;
-    h2{
-        font-family: 'Courier New', Courier, monospace;
-        color: #ff7e5f;
-        font-size: 2 rem;
-        font-weight: bold;
-    }
 }
-.content{
+
+.title-container h2 {
+    font-family: 'Courier New', Courier, monospace;
+    color: #ff7e5f;
+    font-size: 2rem; /* Fixed typo: '2 rem' should be '2rem' */
+    font-weight: bold;
+}
+
+.content {
     padding-top: 10px;
 }
 
-.row{
+.row {
     display: flex;
     gap: 10px;
-
-    mat-form-field{
-        width: 100%;
-    }
 }
 
-.actions{
+.row mat-form-field {
+    width: 100%;
+}
+
+.actions {
     padding: 0px 25px 20px;
-    button{
-        flex: 1;
-    }
+}
+
+.actions button {
+    flex: 1;
 }

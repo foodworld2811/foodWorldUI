@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
               }
             }
           })
-  }
+}
 
 editCategoryForm(id:number){
   const data = this.foodItemsArray[id];

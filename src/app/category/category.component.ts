@@ -23,7 +23,6 @@ export class CategoryComponent {
   isEditMode:any;
   constructor(private fb:FormBuilder,private homeService:HomeService, private dialogRef:MatDialogRef<CategoryComponent>,
       private authService:AuthService, @Inject(MAT_DIALOG_DATA) public data:any) {
-        // console.log("category data",this.data);
         this.isEditMode = !!data?.categoryId;
        }
 
@@ -40,7 +39,7 @@ export class CategoryComponent {
     })
     if (this.data) {
       this.categoryForm.patchValue(this.data)
-    }
+}
     this.categoryForm = this.fb.group({
       categoryStatus:[true ,Validators.required],
       categoryTitle:['',[Validators.required,this.validateAlreadyExistingcategory.bind(this)]],

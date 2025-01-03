@@ -112,7 +112,7 @@
   }
   @media(max-width:1024px){
     .example-card{
-        width: calc(100%-32px);
+        width: calc(100% - 32px);
         margin: 0 auto;
     }
     mat-card-title{

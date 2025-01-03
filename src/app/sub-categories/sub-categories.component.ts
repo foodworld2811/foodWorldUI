@@ -32,7 +32,6 @@ export class SubCategoriesComponent {
     this.isAdminLoggedin = sessionStorage.getItem('isAdminLoggedIn')
     this.route.paramMap.subscribe(params => {
       this.categoryTitle = params.get('category');
-      // console.log(this.categoryTitle);
       this.loadSubCategories();
 
     })
@@ -46,7 +45,6 @@ export class SubCategoriesComponent {
             const cartItem = this.cartItems.find(cart=> cart.itemId === item.itemId);
             return {...item,count : cartItem ? cartItem.count:0}
           });
-        console.log("subCategoryItems",this.subCategoryItems);
       },
       error: (err) => {
         console.log(err);

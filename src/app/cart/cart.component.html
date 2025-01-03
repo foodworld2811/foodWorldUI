@@ -1,9 +1,5 @@
 <app-spinner *ngIf="isLoading"></app-spinner>
 <app-navbar></app-navbar>
-
-<!-- <div *ngIf="isLoading" class="spinner-overlay">
-    <div class="spinner"></div>
-</div> -->
 <div class="cart-container">
     <div *ngFor="let item of cartItems" class="card">
         <div class="card-body">
@@ -24,12 +20,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <label for="table-number">Select Table:</label>
-    <select id="table-number" class="form-control" [(ngModel)]="selectedTableNumber" (change)="onTableSelect($event)"> 
-        <option [value]="null" disabled>Select a table</option>
-        <option *ngFor="let table of tableNumbers" [value]="table">{{table}}</option>
-    </select> -->
     <label for="table-number">Select Table:</label>
     <select id="table-number" class="form-control" [(ngModel)]="selectedTableNumber" (change)="onTableSelect($event)" [disabled]="isTableSelected">
       <option [value]="null" disabled>Select a table</option>

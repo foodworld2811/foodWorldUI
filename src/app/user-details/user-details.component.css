@@ -1,31 +1,34 @@
-.example-spacer{
+.example-spacer {
     flex: 1 1 auto;
 }
 
-.mat-toolbar{
+.mat-toolbar {
     flex: 1 1 auto;
-    background: linear-gradient(90deg, #ffbe338d,#fbc65419);
-    mat-icon{
-         color: white;
-    }
+    background: linear-gradient(90deg, #ffbe338d, #fbc65419);
     font-weight: bold;
     font-family: 'Dancing Script', cursive;
 }
-.main-body{
+
+.mat-toolbar mat-icon {
+    color: white;
+}
+
+.main-body {
     padding-top: 20px;
     margin: 0 auto;
     max-width: 1248px;
+}
 
-    mat-form-field{
-        width: 100%;
-    }
-    h1{
-        font-size: 2.6rem;
-        color:#ffbe33 ;
-        font-family: 'Dancing Script', cursive;
-        font-weight: bold;
-        text-align: center;
-    }
+.main-body mat-form-field {
+    width: 100%;
+}
+
+.main-body h1 {
+    font-size: 2.6rem;
+    color: #ffbe33;
+    font-family: 'Dancing Script', cursive;
+    font-weight: bold;
+    text-align: center;
 }
 
 .button-container {
@@ -33,5 +36,3 @@
     justify-content: flex-end; /* Aligns the button to the right */
     margin-bottom: 10px; /* Adds spacing between the button and the table */
 }
-
-

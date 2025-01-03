@@ -17,7 +17,6 @@ constructor(private route:ActivatedRoute,private homeService:HomeService,private
 ngOnInit(){
   this.route.queryParams.subscribe(params => {
     this.orderId = +params['orderId']; 
-    console.log('Order ID:', this.orderId);
   });
   this.getOrderItems();
 }
@@ -30,7 +29,6 @@ getOrderItems(): void {
   this.homeService.getOrderItems(this.orderId).subscribe(
     (data) => {
       this.orderItems = data;
-      console.log('Order Items:', this.orderItems);
     },
     (error) => {
       console.error('Error fetching order items', error);
@@ -50,8 +48,6 @@ getTotalAmount(): number {
   return this.getSubTotal() + this.getGST();
 }
 placeOrderStatus(){
-  console.log("orderId,orderStatus",this.orderId,this.orderStatus);
-  
   this.homeService.updateOrderStatus(this.orderId,this.orderStatus).subscribe({
     next:(res)=>{
       if(res){

@@ -13,7 +13,6 @@ export class CartService {
 
   private getCartFromStorage(): any[] {
     const storedCart = localStorage.getItem('cartItems');
-    console.log("storedCart",storedCart);
     return storedCart ? JSON.parse(storedCart) : [];
   }
 
@@ -39,7 +38,6 @@ export class CartService {
   }
 
   getCartItems() {
-    console.log("getCartItems() called:")
     return this.cartItems.getValue;
   }
 

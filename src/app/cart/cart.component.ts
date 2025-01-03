@@ -42,20 +42,17 @@ export class CartComponent implements OnInit {
         this.isTableSelected = true; // Disable the select field
       }
       this.cartItems = [...items];
-      console.log("orderId in cart component : ", this.orderId);
     });
 
     // Fetch table numbers
     this.homeService.getTableNumbers().subscribe({
       next: (nums) => {
         this.tableNumbers = nums.map((num: any) => num.tableName);
-        console.log("tableNumbers", this.tableNumbers);
       }
     });
     const username = sessionStorage.getItem('username');
     if (username) {
       this.createdBy = username;
-      console.log('Username:', username);
     } else {
       console.log('No username found in sessionStorage.');
 }
@@ -75,8 +72,6 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
-    console.log("cartItems", this.cartItems);
-
     if (!this.selectedTableNumber) {
       this.authService.openSnackBar("Please select a table number before proceeding to checkout.");
       return;
@@ -92,7 +87,6 @@ export class CartComponent implements OnInit {
     this.quantity = this.cartItems.map(id => id.count);
     this.isLoading = true;
     if (this.orderId) {
-      console.log("Update Order Details");
       this.homeService.updateOrderDetails(this.orderId, this.itemIds, this.quantity).subscribe({
         next: (res) => {
           this.isLoading=false;
@@ -109,7 +103,6 @@ export class CartComponent implements OnInit {
         }
       });
     } else {
-      console.log("Save Order Details");
       this.homeService.saveOrderDetails(this.itemIds, this.quantity, this.selectedTableNumber,this.createdBy).subscribe({
         next: (res) => {
           this.isLoading = false;
