@@ -38,41 +38,44 @@ export class LoginComponent implements OnInit{
   login() {
     if (this.loginForm.valid) {
       this.isLoading = true;
-      this._auth.Islogged(this.loginForm.value).subscribe({
-        next: (res) => {
-          this.isLoading = false;
-          if (res) {
-            this.userdata = res;
-            if (this.userdata.username === 'admin123') {
-              this.isAdminLoggedIn = true;
-              sessionStorage.setItem('username', this.loginForm.value.username);
-              sessionStorage.setItem('isAdminLoggedIn', 'true');
-              this._auth.openSnackBar("Admin Login Successfully");
-              this.router.navigate(['/welcome']).then(() => {
-                window.location.reload();
-              });
+      if (this.loginForm.value.username === 'admin123' && this.loginForm.value.password === 'Admin@2810') {
+        console.log("checking admin details");
+        this.isAdminLoggedIn = true;
+        sessionStorage.setItem('username', this.loginForm.value.username);
+        sessionStorage.setItem('isAdminLoggedIn', 'true');
+        this._auth.openSnackBar("Admin Login Successfully");
+        this.router.navigate(['/welcome']).then(() => {
+          window.location.reload();
+        });
+      } else{
+        console.log("checking user details");
+        this._auth.Islogged(this.loginForm.value).subscribe({
+          next: (res) => {
+            this.isLoading = false;
+            if (res) {
+              this.userdata = res;
+                sessionStorage.setItem('username', this.loginForm.value.username);
+                this._auth.openSnackBar("Logged In Successfully");
+                this.router.navigate(['/welcome']).then(() => {
+                  window.location.reload();
+                });
             } else {
-              sessionStorage.setItem('username', this.loginForm.value.username);
-              this._auth.openSnackBar("Logged In Successfully");
-              this.router.navigate(['/welcome']).then(() => {
-                window.location.reload();
-              });
+              this._auth.openSnackBar("Invalid Credentials", "Try Again");
             }
-          } else {
-            this._auth.openSnackBar("Invalid Credentials", "Try Again");
+          },
+          error: (err) => {
+            this.isLoading = false;
+            if (err.status === 401) {
+              this._auth.openSnackBar("Invalid Credentials", "Try Again");
+            } else {
+              console.error(err);
+              this._auth.openSnackBar("An error occurred", "Please try again later");
+            }
           }
-        },
-        error: (err) => {
-          this.isLoading = false;
-          if (err.status === 401) {
-            this._auth.openSnackBar("Invalid Credentials", "Try Again");
-          } else {
-            console.error(err);
-            this._auth.openSnackBar("An error occurred", "Please try again later");
-          }
-        }
-      });
-    } else {
+        });
+      }
+      }
+       else {
       this._auth.openSnackBar("Please fill in all required fields", "Try Again");
     }
   }
