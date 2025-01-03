@@ -4,10 +4,10 @@ const path = require('path');
 const app = express();
 
 // Serve only the static files form the dist directory
-app.use(express.static('./dist/foodWorldUI'));
+app.use(express.static('./dist/rest-app'));
 
 app.get('/*', (req, res) =>
-    res.sendFile('index.html', {root: 'dist/foodWorldUI/'}),
+    res.sendFile('index.html', {root: 'dist/rest-app/'}),
 );
 
 // Start the app by listening on the default Heroku port
