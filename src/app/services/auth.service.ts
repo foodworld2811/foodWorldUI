@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl = "https://foodworldbe1.onrender.com"
+  apiUrl = "https://foodworldbe1.onrender.com/api"
   constructor(private _snackBar:MatSnackBar, private _http:HttpClient) { }
 
   openSnackBar(message:any, action: any = 'OK'){

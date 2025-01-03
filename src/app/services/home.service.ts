@@ -14,7 +14,7 @@ export class HomeService {
   username$ = this.usernameSubject.asObservable();
   isAdmin$ = this.isAdminSubject.asObservable();
 
-  apiUrl = 'https://foodworldbe1.onrender.com';
+  apiUrl = 'https://foodworldbe1.onrender.com/api';
   constructor(private http: HttpClient) {
 
     const storedUsername = sessionStorage.getItem('username') || '';
